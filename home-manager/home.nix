@@ -109,13 +109,61 @@ in {
       enable = true;
       shellAliases = {
         s = "sudo nixos-rebuild switch";
-        hs = "cd ~/.config/bunny/home-manager && home-manager switch --flake .#billie";
+        hs = "cd ~/.config/bunny/home-manager && home-manager switch --flake .#${username}";
         tidyup = "nix-collect-garbage -d";
         fastfetch = "hyfetch";
       };
       interactiveShellInit = ''
         set fish_greeting
       '';
+    };
+
+    firefox = {
+      enable = true;
+      policies = {
+        DontCheckDefaultBrowser = true;
+        DisableFirefoxAccounts = true;
+        DisableFirefoxStudies = true;
+        DisableTelemetry = true;
+        NoDefaultBookMarks = true;
+        PasswordManagerEnabled = false;
+        ExtensionSettings = {
+        "uBlock0@raymondhill.net" = {
+          default_area = "menupanel";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+          installation_mode = "force_installed";
+          private_browsing = true;
+          };
+        };
+        FirefoxHome = {
+          TopSites = false;
+          SponsoredTopSites = false;
+          Highlights = false;
+          Pocket = false;
+          Stories = false;
+          SponsoredPocket = false;
+          SponsoredStories = false;
+        };
+        Preferences = {
+          "browser.uidensity" = {
+            "Value" = 1;
+            "Status" = "default";
+            "Type" = "number";
+          };
+          "browser.uiCustomization.state" = {
+            "Value" = ''
+              {\"placements\":{\"widget-overflow-fixed-list\":[],\"unified-extensions-area\":[\"ublock0_raymondhill_net-browser-action\"],\"nav-bar\":[\"back-button\",\"forward-button\",\"stop-reload-button\",\"vertical-spacer\",\"urlbar-container\",\"downloads-button\",\"fxa-toolbar-menu-button\",\"unified-extensions-button\"],\"toolbar-menubar\":[\"menubar-items\"],\"TabsToolbar\":[\"firefox-view-button\",\"tabbrowser-tabs\",\"new-tab-button\",\"alltabs-button\"],\"vertical-tabs\":[],\"PersonalToolbar\":[\"import-button\",\"personal-bookmarks\"]},\"seen\":[\"developer-button\",\"screenshot-button\",\"ublock0_raymondhill_net-browser-action\"],\"dirtyAreaCache\":[\"nav-bar\",\"vertical-tabs\",\"PersonalToolbar\",\"toolbar-menubar\",\"TabsToolbar\",\"unified-extensions-area\"],\"currentVersion\":23,\"newElementCount\":3}
+            '';
+            "Status" = "default";
+          };
+          "browser.aboutConfig.showWarning" = {
+            "Value" = true;
+            "Type" = "locked";
+          };
+        };
+        UserMessaging.MoreFromMozilla = false;
+        ReqestedLocales = "en-GB,fr";
+      };
     };
 
     plasma = {
