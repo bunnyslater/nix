@@ -17,9 +17,15 @@
 
   outputs = { nixpkgs, home-manager, plasma-manager, ... }:
     let
-      lib = nixpkgs.lib;
       system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
+      appleColorEmojiOverlay = final: prev: {
+        apple-color-emoji = final.callPackage ./fonts/apple-color-emoji.nix { };
+      };
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+        overlays = [ appleColorEmojiOverlay ];
+      };
     in {
       homeConfigurations = {
         billie = home-manager.lib.homeManagerConfiguration {
@@ -28,8 +34,7 @@
         };
       };
       packages.x86_64-linux = {
-        # apple-color-emoji = pkgs.callPackage ./fonts/apple-color-emoji.nix { };
-       apple-color-emoji = pkgs.callPackage ./fonts/apple-color-emoji.nix { };
+        apple-color-emoji = pkgs.apple-color-emoji;
       };
     };
 }
