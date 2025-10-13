@@ -21,6 +21,39 @@ in {
     ];
   };
 
+  systemd.user.services = {
+    autostart-1password = {
+      Unit = {
+        Description = "Start 1Password (silently) at login";
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = "${lib.getExe pkgs._1password-gui} --silent";
+        Restart = "on-failure";
+      };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
+    };
+    autostart-signal-desktop = {
+      Unit = {
+        Description = "Start Signal Desktop at login";
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = lib.getExe pkgs.signal-desktop;
+        Restart = "on-failure";
+      };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
+    };
+  };
+  
+  
+
   nix = {
     package = pkgs.nix;
     extraOptions = "experimental-features = nix-command flakes";
@@ -121,6 +154,7 @@ in {
         hs = "cd ~/.config/bunny/flake && home-manager switch --flake .#${username}";
         tidyup = "nix-collect-garbage -d";
         fastfetch = "hyfetch";
+        rmgtk = "rm ~/.gtkrc-2.0";
       };
       interactiveShellInit = ''
         set fish_greeting
