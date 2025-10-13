@@ -27,5 +27,9 @@
           modules = [ ./home.nix plasma-manager.homeModules.plasma-manager ];
         };
       };
+      packages.x86_64-linux = {
+        # apple-color-emoji = pkgs.callPackage ./fonts/apple-color-emoji.nix { };
+       apple-color-emoji = pkgs.callPackage ./fonts/apple-color-emoji.nix { };
+      };
     };
 }

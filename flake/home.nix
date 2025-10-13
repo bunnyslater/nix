@@ -117,7 +117,7 @@ in {
       enable = true;
       shellAliases = {
         s = "sudo nixos-rebuild switch";
-        hs = "cd ~/.config/bunny/home-manager && home-manager switch --flake .#${username}";
+        hs = "cd ~/.config/bunny/flake && home-manager switch --flake .#${username}";
         tidyup = "nix-collect-garbage -d";
         fastfetch = "hyfetch";
       };
@@ -215,6 +215,7 @@ in {
               };
             };
           }
+          "org.kde.plasma.pager"
           # If no configuration is needed, specifying only the name of the
           # widget will add them with the default configuration.
           # "org.kde.plasma.marginsseparator"
