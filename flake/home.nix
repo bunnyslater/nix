@@ -15,6 +15,7 @@ in {
         flavour = ["mocha"];
         accents = ["lavender"];
       })
+      pkgs.apple-color-emoji
       kdePackages.breeze-gtk
       vscode
     ];
