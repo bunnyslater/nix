@@ -15,6 +15,7 @@ in {
         flavour = ["mocha"];
         accents = ["lavender"];
       })
+      kdePackages.breeze-gtk
       vscode
     ];
   };
@@ -22,6 +23,13 @@ in {
   nix = {
     package = pkgs.nix;
     extraOptions = "experimental-features = nix-command flakes";
+  };
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "breeze-gtk";
+    };
   };
 
   home.file.".config/nixpkgs/config.nix" = {
@@ -150,12 +158,6 @@ in {
             "Status" = "default";
             "Type" = "number";
           };
-          "browser.uiCustomization.state" = {
-            "Value" = ''
-              {\"placements\":{\"widget-overflow-fixed-list\":[],\"unified-extensions-area\":[\"ublock0_raymondhill_net-browser-action\"],\"nav-bar\":[\"back-button\",\"forward-button\",\"stop-reload-button\",\"vertical-spacer\",\"urlbar-container\",\"downloads-button\",\"fxa-toolbar-menu-button\",\"unified-extensions-button\"],\"toolbar-menubar\":[\"menubar-items\"],\"TabsToolbar\":[\"firefox-view-button\",\"tabbrowser-tabs\",\"new-tab-button\",\"alltabs-button\"],\"vertical-tabs\":[],\"PersonalToolbar\":[\"import-button\",\"personal-bookmarks\"]},\"seen\":[\"developer-button\",\"screenshot-button\",\"ublock0_raymondhill_net-browser-action\"],\"dirtyAreaCache\":[\"nav-bar\",\"vertical-tabs\",\"PersonalToolbar\",\"toolbar-menubar\",\"TabsToolbar\",\"unified-extensions-area\"],\"currentVersion\":23,\"newElementCount\":3}
-            '';
-            "Status" = "default";
-          };
           "browser.aboutConfig.showWarning" = {
             "Value" = true;
             "Type" = "locked";
@@ -170,8 +172,9 @@ in {
       enable = true;
       workspace = {
         lookAndFeel = "org.kde.breezedark.desktop";
-        iconTheme = "breeze-dark";
         colorScheme = "CatppuccinMochaLavender";
+        iconTheme = "breeze-dark";
+        wallpaper = "/home/${username}/.config/bunny/misc/jamie-kettle-CziCVd8c9lU-unsplash\ copy\ 2.jpg";
       };
       panels = [
       # Windows-like panel at the bottom
