@@ -180,13 +180,26 @@ in {
       enable = true;
       shellAliases = {
         s = "sudo nixos-rebuild switch";
-        hs = "cd ~/.config/bunny/flake && home-manager switch --flake .#${username}";
+        hs = "rm ~/.gtkrc-2.0 && cd ~/.config/bunny/flake && home-manager switch --flake .#${username}";
         tidyup = "nix-collect-garbage -d";
         fastfetch = "hyfetch";
-        rmgtk = "rm ~/.gtkrc-2.0";
       };
       interactiveShellInit = ''
         set fish_greeting
+        function fish_prompt
+          set_color cyan
+          echo -n '⋊> '
+          set_color FF8800
+          echo -n (prompt_pwd)
+          set_color normal
+          echo -n ' '
+        end
+
+        function fish_right_prompt
+          set_color brgrey
+          date "+%H:%M:%S"
+          set_color normal
+        end
       '';
     };
 
