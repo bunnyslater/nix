@@ -366,4 +366,47 @@ in {
       Parent=FALLBACK/
     '';
   };
+
+  home.file.".config/dolphinrc" = {
+    text = ''
+        MenuBar=Disabled
+
+        [DetailsMode]
+        IconSize=48
+        RightPadding=23
+
+        [ExtractDialog]
+        1536x960 screen: Height=540
+        1536x960 screen: Width=1024
+
+        [FileDialogSize]
+        2 screens: Height=584
+        2 screens: Width=820
+
+        [General]
+        GlobalViewProps=false
+        ShowFullPath=true
+        ShowStatusBar=FullWidth
+        Version=202
+        ViewPropsTimestamp=2025,7,20,15,23,11.818
+
+        [IconsMode]
+        IconSize=80
+        PreviewSize=144
+
+        [KFileDialog Settings]
+        Places Icons Auto-resize=false
+        Places Icons Static Size=22
+
+        [PreviewSettings]
+        Plugins=appimagethumbnail,audiothumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,jpegthumbnail,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,opendocumentthumbnail,svgthumbnail,gdk-pixbuf-thumbnailer
+
+        [Search]
+        Location=Everywhere
+
+        [ViewPropertiesDialog]
+        1536x960 screen: Height=714
+        1536x960 screen: Width=379
+    '';
+  };
 }
