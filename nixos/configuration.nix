@@ -102,7 +102,7 @@
   users.users.billie = {
     isNormalUser = true;
     description = "billie";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" ];
     shell = pkgs.fish;
     packages = with pkgs; [
       kdePackages.kate
@@ -156,6 +156,7 @@
    gnumake
    git
    konsave
+   alsa-utils
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
