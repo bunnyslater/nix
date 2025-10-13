@@ -28,6 +28,12 @@ in {
     text = "{ allowUnfree = true; }";
   };
 
+  xdg.desktopEntries.apple-notes = {
+    name = "Apple Notes";
+    exec = "${pkgs.ungoogled-chromium}/bin/chromium --app=https://icloud.com/notes";
+    icon = "/home/${username}/.config/bunny/misc/apple-notes.ico"; 
+  };
+
   xdg.mimeApps = {
     enable = true;
     associations.added = {
@@ -149,6 +155,7 @@ in {
                   "applications:1password.desktop"
                   "applications:org.kde.konsole.desktop"
                   "applications:systemsettings.desktop"
+                  "applications:apple-notes.desktop"
                   "applications:signal.desktop"
                   "applications:chromium-browser.desktop"
                   "applications:anki.desktop"
