@@ -139,7 +139,7 @@ in {
       "image/png" = [ "org.gnome.eog.desktop" ];
       "image/webp" = [ "org.gnome.eog.desktop" ];
       "image/x-icns" = [ "org.gnome.eog.desktop" ];
-      "text/plain" = [ "code.desktop" ];
+      "text/plain" = [ "kate.desktop" ];
       "video/mp4" = [ "vlc.desktop" ];
       "x-scheme-handler/http" = [ "firefox.desktop" ];
       "x-scheme-handler/https" = [ "firefox.desktop" ];
@@ -171,7 +171,7 @@ in {
       "image/png" = [ "org.gnome.eog.desktop" ];
       "image/webp" = [ "org.gnome.eog.desktop" ];
       "image/x-icns" = [ "org.gnome.eog.desktop" ];
-      "text/plain" = [ "code.desktop" ];
+      "text/plain" = [ "kate.desktop" ];
       "video/mp4" = [ "vlc.desktop" ];
       "x-scheme-handler/http" = [ "firefox.desktop" ];
       "x-scheme-handler/https" = [ "firefox.desktop" ];
