@@ -209,7 +209,6 @@ in {
       enable = true;
       policies = {
         DontCheckDefaultBrowser = true;
-        DisableFirefoxAccounts = true;
         DisableFirefoxStudies = true;
         DisableTelemetry = true;
         NoDefaultBookMarks = true;
@@ -221,6 +220,12 @@ in {
           installation_mode = "force_installed";
           private_browsing = true;
           };
+        "gdpr@cavi.au.dk" = {
+          default_area = "menupanel";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/consent-o-matic/latest.xpi";
+          installation_mode = "force_installed";
+          private_browsing = true;
+        };
         };
         FirefoxHome = {
           TopSites = false;
@@ -244,6 +249,26 @@ in {
         };
         UserMessaging.MoreFromMozilla = false;
         ReqestedLocales = "en-GB,fr";
+      };
+    };
+
+    hyfetch = {
+      enable = true;
+      settings = {
+        preset = "transgender";
+        mode = "rgb";
+        light_dark = "dark";
+        lightness = 0.65;
+        color_align = {
+            mode = "horizontal";
+            custom_colors = [];
+            fore_back = null;
+        };
+        backend = "fastfetch";
+        args = null;
+        distro = null;
+        pride_month_shown = [];
+        pride_month_disable = false;
       };
     };
 
