@@ -29,8 +29,17 @@ in
   };
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    extraModprobeConfig = ''
+      options snd_hda_intel power_save=0
+    '';
+  };
+
 
   networking.hostName = "nixos"; # Define your hostname.
 
@@ -162,7 +171,6 @@ in
    gcc
    gnumake
    git
-   konsave
    alsa-utils
    appleColorEmoji
   ];
