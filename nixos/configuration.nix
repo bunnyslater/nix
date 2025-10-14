@@ -134,21 +134,25 @@ in
   }
 ];
 
-fonts.enableDefaultPackages = false;
-fonts.packages = with pkgs; [
-  dejavu_fonts
-  freefont_ttf
-  gyre-fonts
-  liberation_ttf
-  unifont
-  appleColorEmoji
-];
+  fonts.enableDefaultPackages = false;
+  fonts.packages = with pkgs; [
+    dejavu_fonts
+    freefont_ttf
+    gyre-fonts
+    liberation_ttf
+    unifont
+    appleColorEmoji
+  ];
   
 
-  programs.fish.enable = true;
-
-  # Install firefox.
-  programs.firefox.enable = false;
+  programs = {
+    fish.enable = true;
+    firefox.enable = false;
+    vim = {
+      enable = true;
+      defaultEditor = true;
+    };
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -156,7 +160,6 @@ fonts.packages = with pkgs; [
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-   vim
    wget
    fastfetch
    hyfetch
