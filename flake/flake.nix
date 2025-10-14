@@ -30,7 +30,7 @@
       homeConfigurations = {
         billie = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ ./home.nix plasma-manager.homeModules.plasma-manager ];
+          modules = [ ./home.nix ./flatpak.nix plasma-manager.homeModules.plasma-manager ];
         };
       };
       packages.x86_64-linux = {

@@ -117,7 +117,7 @@ in
       vlc
       libreoffice-qt6-fresh
       remmina
-      signal-desktop
+      # signal-desktop
       tor-browser
       transmission_4-qt6
       eog
@@ -133,6 +133,8 @@ in
     ];
   }
 ];
+
+  services.flatpak.enable = true;
 
   fonts.enableDefaultPackages = false;
   fonts.packages = with pkgs; [
@@ -176,6 +178,11 @@ in
    alsa-utils
    appleColorEmoji
   ];
+
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

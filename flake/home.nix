@@ -15,7 +15,6 @@ in {
         flavour = ["mocha"];
         accents = ["lavender"];
       })
-      pkgs.apple-color-emoji
       kdePackages.breeze-gtk
       vscode
     ];
@@ -50,7 +49,7 @@ in {
         After = [ "graphical-session.target" ];
       };
       Service = {
-        ExecStart = lib.getExe pkgs.signal-desktop;
+        ExecStart = "${pkgs.flatpak}/bin/flatpak run org.signal.Signal";
         Restart = "on-failure";
       };
       Install = {
@@ -252,6 +251,20 @@ in {
       };
     };
 
+    # distrobox = {
+    #   enable = true;
+    #   containers = {
+    #     arch = {
+    #       additional_packages = "git base-devel fakeroot fastfetch hyfetch noto-fonts signal-desktop";
+    #       entry = true;
+    #       image = "docker.io/library/archlinux:latest";
+    #       exported_apps = [
+    #         "/usr/share/applications/signal-desktop.desktop"
+    #       ];
+    #     };
+    #   };
+    # };
+
     plasma = {
       enable = true;
       workspace = {
@@ -291,7 +304,7 @@ in {
                   "applications:org.kde.konsole.desktop"
                   "applications:systemsettings.desktop"
                   "applications:apple-notes.desktop"
-                  "applications:signal.desktop"
+                  "applications:org.signal.Signal.desktop"
                   "applications:chromium-browser.desktop"
                   "applications:anki.desktop"
                   "applications:code.desktop"
