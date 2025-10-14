@@ -4,6 +4,9 @@
 
 { config, pkgs, ... }:
 
+let
+  appleColorEmoji = import ../flake/fonts/apple-color-emoji.nix { inherit pkgs; };
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -131,6 +134,17 @@
   }
 ];
 
+fonts.enableDefaultPackages = false;
+fonts.packages = with pkgs; [
+  dejavu_fonts
+  freefont_ttf
+  gyre-fonts
+  liberation_ttf
+  unifont
+  appleColorEmoji
+];
+  
+
   programs.fish.enable = true;
 
   # Install firefox.
@@ -157,6 +171,7 @@
    git
    konsave
    alsa-utils
+   appleColorEmoji
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

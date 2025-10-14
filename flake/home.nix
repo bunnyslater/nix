@@ -21,6 +21,13 @@ in {
     ];
   };
 
+  fonts.fontconfig = {
+    enable = true; # excl. to HM
+    defaultFonts = {
+      emoji = [ "Apple Color Emoji" ];
+    };
+  };
+
   systemd.user.services = {
     autostart-1password = {
       Unit = {
