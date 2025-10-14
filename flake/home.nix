@@ -57,20 +57,20 @@ in {
         WantedBy = [ "graphical-session.target" ];
       };
     };
-    silent-audio = {
-      Unit = {
-        Description = "Silent Audio to Prevent HDA Failure";
-      };
-      Service = {
-        ExecStart = "%h/.local/share/silent-audio/silent-audio.sh";
-        Restart = "on-failure";
-        RestartSec = "10s";
-        Environment = "XDG_RUNTIME_DIR=%t";
-      };
-      Install = {
-        WantedBy = [ "default.target" ];
-      };
-    };
+    # silent-audio = {
+    #   Unit = {
+    #     Description = "Silent Audio to Prevent HDA Failure";
+    #   };
+    #   Service = {
+    #     ExecStart = "%h/.local/share/silent-audio/silent-audio.sh";
+    #     Restart = "on-failure";
+    #     RestartSec = "10s";
+    #     Environment = "XDG_RUNTIME_DIR=%t";
+    #   };
+    #   Install = {
+    #     WantedBy = [ "default.target" ];
+    #   };
+    # };
   };
   
   home.file.".local/share/silent-audio/silent-audio.sh" = {
