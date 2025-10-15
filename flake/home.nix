@@ -367,6 +367,7 @@ in {
         iconTheme = "breeze-dark";
         wallpaper = "/home/${username}/.config/bunny/misc/jamie-kettle-CziCVd8c9lU-unsplash\ copy\ 2.jpg";
       };
+      kscreenlocker.appearance.wallpaper = "/home/${username}/.config/bunny/misc/jamie-kettle-CziCVd8c9lU-unsplash\ copy\ 2.jpg";
       panels = [
       {
         location = "bottom";
