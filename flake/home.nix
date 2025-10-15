@@ -108,6 +108,12 @@ in {
     };
   };
 
+  home.file.".config/libvirt/qemu.conf" = {
+    text = ''
+      nvram = [ "/run/libvirt/nix-ovmf/AAVMF_CODE.fd:/run/libvirt/nix-ovmf/AAVMF_VARS.fd", "/run/libvirt/nix-ovmf/OVMF_CODE.fd:/run/libvirt/nix-ovmf/OVMF_VARS.fd" ]
+    '';
+  };
+
   xdg.desktopEntries.apple-notes = {
     name = "Apple Notes";
     exec = "${pkgs.ungoogled-chromium}/bin/chromium --app=https://icloud.com/notes";
