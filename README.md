@@ -15,3 +15,5 @@ services.userProfilePicture = {
     users.billie.picture = ../misc/pfp.jpg; # Required if enable = true;
 };
 ```
+
+- `pfp.jpg` comes from a still of Laura Les' set at [A2B2 Night of Fire](https://www.youtube.com/watch?v=mxa55SJ8KC8).
