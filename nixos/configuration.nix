@@ -1,7 +1,11 @@
 { config, pkgs, lib, ... }:
 
 let
+  # Configure variables.
+  locale = "en_GB.UTF-8";
   nvidia = true;
+
+  #Imports apple-color-emoji.nix.
   appleColorEmoji = import ../flake/assets/apple-color-emoji.nix { inherit pkgs; };
 in
 {
@@ -51,17 +55,17 @@ in
 
   # Define locales.
   i18n = {
-    defaultLocale = "en_GB.UTF-8";
+    defaultLocale = "${locale}";
     extraLocaleSettings = {
-      LC_ADDRESS = "en_GB.UTF-8";
-      LC_IDENTIFICATION = "en_GB.UTF-8";
-      LC_MEASUREMENT = "en_GB.UTF-8";
-      LC_MONETARY = "en_GB.UTF-8";
-      LC_NAME = "en_GB.UTF-8";
-      LC_NUMERIC = "en_GB.UTF-8";
-      LC_PAPER = "en_GB.UTF-8";
-      LC_TELEPHONE = "en_GB.UTF-8";
-      LC_TIME = "en_GB.UTF-8";
+      LC_ADDRESS = "${locale}";
+      LC_IDENTIFICATION = "${locale}";
+      LC_MEASUREMENT = "${locale}";
+      LC_MONETARY = "${locale}";
+      LC_NAME = "${locale}";
+      LC_NUMERIC = "${locale}";
+      LC_PAPER = "${locale}";
+      LC_TELEPHONE = "${locale}";
+      LC_TIME = "${locale}";
     };
   };
 
