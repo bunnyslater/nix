@@ -11,12 +11,12 @@ in
   imports =
     [
       ./hardware-configuration.nix
-      ../flake/assets/profile.nix
+      ../flake/assets/profile-picture.nix
     ];
 
   services.userProfilePicture = {
     enable = true;
-    users.billie.picture = ../flake/assets/pfp.jpg;
+    users.billie.picture = ../misc/pfp.jpg;
   };
 
   hardware.graphics = {
