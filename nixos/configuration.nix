@@ -2,9 +2,10 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
+  nvidia = true;
   appleColorEmoji = import ../flake/assets/apple-color-emoji.nix { inherit pkgs; };
 in
 {
@@ -19,14 +20,14 @@ in
     users.billie.picture = ../misc/pfp.jpg;
   };
 
-  hardware.graphics = {
+  hardware.graphics = lib.mkIf nvidia {
     enable = true;
     enable32Bit = true;
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = lib.mkIf nvidia [ "nvidia" ];
 
-  hardware.nvidia = {
+  hardware.nvidia = lib.mkIf nvidia {
     modesetting.enable = true;
     powerManagement.enable = false;
     powerManagement.finegrained = false;
