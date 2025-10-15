@@ -101,6 +101,13 @@ in {
     text = "{ allowUnfree = true; }";
   };
 
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
+    };
+  };
+
   xdg.desktopEntries.apple-notes = {
     name = "Apple Notes";
     exec = "${pkgs.ungoogled-chromium}/bin/chromium --app=https://icloud.com/notes";
@@ -395,6 +402,7 @@ in {
                   "applications:systemsettings.desktop"
                   "applications:apple-notes.desktop"
                   "applications:org.signal.Signal.desktop"
+                  "applications:virt-manager.desktop"
                   "applications:chromium-browser.desktop"
                   "applications:anki.desktop"
                   "applications:code.desktop"

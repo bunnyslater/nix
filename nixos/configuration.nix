@@ -37,9 +37,9 @@ in
     };
     extraModprobeConfig = ''
       options snd_hda_intel power_save=0
+      options kvm_intel nested=1
     '';
   };
-
 
   networking.hostName = "nixos"; # Define your hostname.
 
@@ -99,7 +99,7 @@ in
   users.users.billie = {
     isNormalUser = true;
     description = "billie";
-    extraGroups = [ "networkmanager" "wheel" "audio" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "libvirtd" ];
     shell = pkgs.fish;
     packages = with pkgs; [
       kdePackages.kate
@@ -173,11 +173,22 @@ in
    git
    alsa-utils
    appleColorEmoji
+   virt-manager
   ];
 
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      qemu = {
+        runAsRoot = true;
+        swtpm.enable = true;
+      };
+    };
+    spiceUSBRedirection.enable = true;
+    podman = {
+      enable = true;
+      dockerCompat = true;
+    };
   };
 
   # Enable the OpenSSH daemon.
