@@ -19,7 +19,7 @@
     let
       system = "x86_64-linux";
       appleColorEmojiOverlay = final: prev: {
-        apple-color-emoji = final.callPackage ./fonts/apple-color-emoji.nix { };
+        apple-color-emoji = final.callPackage ./assets/apple-color-emoji.nix { };
       };
       pkgs = import nixpkgs {
         inherit system;

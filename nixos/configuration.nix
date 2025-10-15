@@ -5,13 +5,19 @@
 { config, pkgs, ... }:
 
 let
-  appleColorEmoji = import ../flake/fonts/apple-color-emoji.nix { inherit pkgs; };
+  appleColorEmoji = import ../flake/assets/apple-color-emoji.nix { inherit pkgs; };
 in
 {
   imports =
     [
       ./hardware-configuration.nix
+      ../flake/assets/profile.nix
     ];
+
+  services.userProfilePicture = {
+    enable = true;
+    users.billie.picture = ../flake/assets/pfp.jpg;
+  };
 
   hardware.graphics = {
     enable = true;
