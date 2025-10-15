@@ -176,6 +176,10 @@ in
    virt-manager
   ];
 
+  environment.sessionVariables = {
+    GTK_THEME = "Breeze";
+  };
+
   virtualisation = {
     libvirtd = {
       enable = true;
