@@ -3,7 +3,7 @@
 let
   # Configure variables.
   locale = "en_GB.UTF-8";
-  nvidia = true;
+  enableNvidiaDrivers = true;
 
   #Imports apple-color-emoji.nix.
   appleColorEmoji = import ../flake/assets/apple-color-emoji.nix { inherit pkgs; };
@@ -17,11 +17,11 @@ in
 
   # Configure NVIDIA drivers.
   hardware = {
-    graphics = lib.mkIf nvidia {
+    graphics = lib.mkIf enableNvidiaDrivers {
       enable = true;
       enable32Bit = true;
     };
-    nvidia = lib.mkIf nvidia {
+    nvidia = lib.mkIf enableNvidiaDrivers {
       modesetting.enable = true;
       powerManagement.enable = false;
       powerManagement.finegrained = false;
@@ -73,7 +73,7 @@ in
   services = {
     xserver = {
       enable = true;
-      videoDrivers = lib.mkIf nvidia [ "nvidia" ];
+      videoDrivers = lib.mkIf enableNvidiaDrivers [ "nvidia" ];
       # Define keymap in X11.
       xkb = {
         layout = "gb";
