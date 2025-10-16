@@ -13,7 +13,7 @@ e.g.
 ```
 services.userProfilePicture = {
     enable = true;
-    users.${globals.username}.picture = ../misc/pfp.jpg; # Required if enable = true;
+    users.${globals.username}.picture = ../misc/pfp.jpg; # Required if service is enabled
 };
 ```
 
