@@ -1,10 +1,11 @@
-{ lib, pkgs, ... }: let
+{ lib, pkgs, plasma-manager, ... }: let
   # Import global variables
   globals = import ../nixos/globals.nix;
   username = globals.username;
 in {
   imports = [
     # Plasma-manager configuration (configures wallpaper, theme, etc.) and a couple abitrary files (Konsole colorscheme and profile, .dolphinrc).
+    plasma-manager.homeModules.plasma-manager
     ./plasma.nix
     # Firefox configuration. Extensions and preferences.
     ./firefox.nix
@@ -14,6 +15,9 @@ in {
     # Unless you are using one of these devices, comment this out.
     # ./silent-audio.nix
   ];
+
+  # Allow unfree packages.
+  nixpkgs.config.allowUnfree = true;
 
   home = {
     username = globals.username;
@@ -58,9 +62,9 @@ in {
     fish = {
       enable = true;
       shellAliases = {
-        s = "sudo nixos-rebuild switch";
-        hs = "rm ~/.gtkrc-2.0 && cd ~/.config/bunny/flake && home-manager switch --flake .#${username}";
-        update = "sudo nix-channel --update && sudo nixos-rebuild switch && cd ~/.config/bunny/flake && nix flake update && home-manager switch --flake .#${username}";
+        s = "sudo nixos-rebuild switch --flake ~/.config/bunny/flake#${globals.hostname}";
+        hs = "home-manager switch --flake ~/.config/bunny/flake#${username}";
+        update = "cd ~/.config/bunny/flake && nix flake update && sudo nixos-rebuild switch --flake .#${globals.hostname}";
         tidyup = "nix-collect-garbage -d";
         fastfetch = "hyfetch";
       };
@@ -146,8 +150,7 @@ in {
 
   # Required for flake usage.
   nix = {
-    package = pkgs.nix;
-    extraOptions = "experimental-features = nix-command flakes";
+    settings.experimental-features = [ "nix-command" "flakes" ];
   };
 
   # Configures Breeze to be the default GTK theme.

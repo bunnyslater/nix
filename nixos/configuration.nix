@@ -10,7 +10,6 @@ in
 {
   imports =
     [
-      ./hardware-configuration.nix
       ../flake/assets/profile-picture.nix
     ];
 
@@ -44,7 +43,7 @@ in
   # Configure networking.
   networking = {
     # Define hostname.
-    hostName = "nixos";
+    hostName = globals.hostname;
     # Enable NetworkManager.
     networkmanager.enable = true;
   };

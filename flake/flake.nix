@@ -26,9 +26,29 @@
         config.allowUnfree = true;
         overlays = [ appleColorEmojiOverlay ];
       };
+      # Import global variables.
+      globals = import ../nixos/globals.nix;
+      username = globals.username;
+      hostname = globals.hostname;
     in {
+      nixosConfigurations = {
+        "${hostname}" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ../nixos/hardware/${hostname}.nix
+            ../nixos/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.users.${username} = {
+                imports = [ ./home.nix ./flatpak.nix ];
+              };
+              home-manager.extraSpecialArgs = { inherit plasma-manager; };
+            }
+          ];
+        };
+      };
       homeConfigurations = {
-        billie = home-manager.lib.homeManagerConfiguration {
+        "${username}" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [ ./home.nix ./flatpak.nix plasma-manager.homeModules.plasma-manager ];
         };
