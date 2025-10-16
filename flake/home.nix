@@ -10,6 +10,9 @@ in {
     ./firefox.nix
     # XDG configuration. XDG, among other things, is the standard .desktop files work with, and sets up file associations.
     ./xdg.nix
+    # silent-audio fixes audio issues on Yoga Pro 9 14IRP8/16IRP8 devices by creating a systemd service that loops a silent audio file.
+    # Unless you are using one of these devices, comment this out.
+    # ./silent-audio.nix
   ];
 
   home = {
@@ -85,39 +88,8 @@ in {
         WantedBy = [ "graphical-session.target" ];
       };
     };
-    # silent-audio = {
-    #   Unit = {
-    #     Description = "Silent Audio to Prevent HDA Failure";
-    #   };
-    #   Service = {
-    #     ExecStart = "%h/.local/share/silent-audio/silent-audio.sh";
-    #     Restart = "on-failure";
-    #     RestartSec = "10s";
-    #     Environment = "XDG_RUNTIME_DIR=%t";
-    #   };
-    #   Install = {
-    #     WantedBy = [ "default.target" ];
-    #   };
-    # };
   };
   
-  home.file.".local/share/silent-audio/silent-audio.sh" = {
-    text = ''
-      #!${pkgs.bash}/bin/bash
-
-      while true; do
-          # loop another audio asynchronously with 1 second delay to prevent speaker dying between the gaps
-        sh -c "sleep 1; aplay /home/${username}/.local/share/silent-audio/silent.wav" &
-        aplay /home/${username}/.local/share/silent-audio/silent.wav
-      done
-    '';
-    executable = true;
-  };
-
-  home.file.".local/share/silent-audio/silent.wav" = {
-    source = ./silent-audio/silent.wav;
-  };
-
   nix = {
     package = pkgs.nix;
     extraOptions = "experimental-features = nix-command flakes";
@@ -165,7 +137,6 @@ in {
         end
       '';
     };
-
     hyfetch = {
       enable = true;
       settings = {
