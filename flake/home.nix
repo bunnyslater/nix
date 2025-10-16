@@ -4,7 +4,10 @@
   username = globals.username;
 in {
   imports = [
+    # Plasma-manager configuration (configures wallpaper, theme, etc.) and a couple abitrary files (Konsole colorscheme and profile, .dolphinrc).
     ./plasma.nix
+    # XDG configuration. XDG, among other things, is the standard .desktop files work with, and sets up file associations.
+    ./xdg.nix
   ];
 
   home = {
@@ -12,6 +15,7 @@ in {
     homeDirectory = "/home/" + username;
     stateVersion = globals.stateVersion;
 
+    # TODO: Move configuration.nix user packages here.
     packages = with pkgs; [
       (pkgs.catppuccin-kde.override {
         flavour = ["mocha"];
@@ -20,6 +24,18 @@ in {
       kdePackages.breeze-gtk
       vscode
     ];
+
+    # Some programs cannot be managed by home-manager directly, so for them we define abitrary files here.
+    file = {
+      ".config/nixpkgs/config.nix" = {
+        text = "{ allowUnfree = true; }";
+      };
+      ".config/libvirt/qemu.conf" = {
+        text = ''
+          nvram = [ "/run/libvirt/nix-ovmf/AAVMF_CODE.fd:/run/libvirt/nix-ovmf/AAVMF_VARS.fd", "/run/libvirt/nix-ovmf/OVMF_CODE.fd:/run/libvirt/nix-ovmf/OVMF_VARS.fd" ]
+        '';
+      };
+    };
   };
 
   fonts.fontconfig = {
@@ -103,97 +119,11 @@ in {
     };
   };
 
-  home.file.".config/nixpkgs/config.nix" = {
-    text = "{ allowUnfree = true; }";
-  };
-
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
       autoconnect = ["qemu:///system"];
       uris = ["qemu:///system"];
     };
-  };
-
-  home.file.".config/libvirt/qemu.conf" = {
-    text = ''
-      nvram = [ "/run/libvirt/nix-ovmf/AAVMF_CODE.fd:/run/libvirt/nix-ovmf/AAVMF_VARS.fd", "/run/libvirt/nix-ovmf/OVMF_CODE.fd:/run/libvirt/nix-ovmf/OVMF_VARS.fd" ]
-    '';
-  };
-
-  xdg.desktopEntries.apple-notes = {
-    name = "Apple Notes";
-    exec = "${pkgs.ungoogled-chromium}/bin/chromium --app=https://icloud.com/notes";
-    icon = "/home/${username}/.config/bunny/misc/apple-notes.ico"; 
-  };
-
-  xdg.mimeApps = {
-    enable = true;
-    associations.added = {
-      "application/pdf" = [ "chromium-browser.desktop" ];
-      "audio/aac" = [ "vlc.desktop" ];
-      "audio/mp4" = [ "vlc.desktop" ];
-      "audio/mpeg" = [ "vlc.desktop" ];
-      "audio/mpegurl" = [ "vlc.desktop" ];
-      "audio/ogg" = [ "vlc.desktop" ];
-      "audio/vnd.rn-realaudio" = [ "vlc.desktop" ];
-      "audio/vorbis" = [ "vlc.desktop" ];
-      "audio/x-flac" = [ "vlc.desktop" ];
-      "audio/x-mp3" = [ "vlc.desktop" ];
-      "audio/x-mpegurl" = [ "vlc.desktop" ];
-      "audio/x-ms-wma" = [ "vlc.desktop" ];
-      "audio/x-musepack" = [ "vlc.desktop" ];
-      "audio/x-oggflac" = [ "vlc.desktop" ];
-      "audio/x-pn-realaudio" = [ "vlc.desktop" ];
-      "audio/x-scpls" = [ "vlc.desktop" ];
-      "audio/x-speex" = [ "vlc.desktop" ];
-      "audio/x-vorbis" = [ "vlc.desktop" ];
-      "audio/x-vorbis+ogg" = [ "vlc.desktop" ];
-      "audio/x-wav" = [ "vlc.desktop" ];
-      "image/bmp" = [ "org.gnome.eog.desktop" ];
-      "image/jpeg" = [ "org.gnome.eog.desktop" ];
-      "image/png" = [ "org.gnome.eog.desktop" ];
-      "image/webp" = [ "org.gnome.eog.desktop" ];
-      "image/x-icns" = [ "org.gnome.eog.desktop" ];
-      "text/plain" = [ "kate.desktop" ];
-      "video/mp4" = [ "vlc.desktop" ];
-      "x-scheme-handler/http" = [ "firefox.desktop" ];
-      "x-scheme-handler/https" = [ "firefox.desktop" ];
-      "x-scheme-handler/mailto" = [ "firefox.desktop" ];
-    };
-    defaultApplications = {
-      "application/pdf" = [ "chromium-browser.desktop" ];
-      "audio/aac" = [ "vlc.desktop" ];
-      "audio/mp4" = [ "vlc.desktop" ];
-      "audio/mpeg" = [ "vlc.desktop" ];
-      "audio/mpegurl" = [ "vlc.desktop" ];
-      "audio/ogg" = [ "vlc.desktop" ];
-      "audio/vnd.rn-realaudio" = [ "vlc.desktop" ];
-      "audio/vorbis" = [ "vlc.desktop" ];
-      "audio/x-flac" = [ "vlc.desktop" ];
-      "audio/x-mp3" = [ "vlc.desktop" ];
-      "audio/x-mpegurl" = [ "vlc.desktop" ];
-      "audio/x-ms-wma" = [ "vlc.desktop" ];
-      "audio/x-musepack" = [ "vlc.desktop" ];
-      "audio/x-oggflac" = [ "vlc.desktop" ];
-      "audio/x-pn-realaudio" = [ "vlc.desktop" ];
-      "audio/x-scpls" = [ "vlc.desktop" ];
-      "audio/x-speex" = [ "vlc.desktop" ];
-      "audio/x-vorbis" = [ "vlc.desktop" ];
-      "audio/x-vorbis+ogg" = [ "vlc.desktop" ];
-      "audio/x-wav" = [ "vlc.desktop" ];
-      "image/bmp" = [ "org.gnome.eog.desktop" ];
-      "image/jpeg" = [ "org.gnome.eog.desktop" ];
-      "image/png" = [ "org.gnome.eog.desktop" ];
-      "image/webp" = [ "org.gnome.eog.desktop" ];
-      "image/x-icns" = [ "org.gnome.eog.desktop" ];
-      "text/plain" = [ "kate.desktop" ];
-      "video/mp4" = [ "vlc.desktop" ];
-      "x-scheme-handler/http" = [ "firefox.desktop" ];
-      "x-scheme-handler/https" = [ "firefox.desktop" ];
-      "x-scheme-handler/mailto" = [ "firefox.desktop" ];
-      "x-scheme-handler/x-github-client" = [ "github-desktop.desktop" ];
-      "x-scheme-handler/x-github-desktop-auth" = [ "github-desktop.desktop" ];
-      };
   };
 
   programs = {
