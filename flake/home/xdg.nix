@@ -1,6 +1,4 @@
 { lib, globals, username, pkgs, ... }: let
-  # Import global variables
-  globals = import ../nixos/globals.nix;
   username = globals.username;
 
   # Define associations in a variable to avoid duplication

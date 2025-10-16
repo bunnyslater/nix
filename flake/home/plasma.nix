@@ -1,6 +1,4 @@
 { lib, globals, username, ... }: let
-  # Import global variables
-  globals = import ../nixos/globals.nix;
   username = globals.username;
 in {
   programs.plasma = {

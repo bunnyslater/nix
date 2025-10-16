@@ -1,6 +1,4 @@
-{ lib, pkgs, plasma-manager, ... }: let
-  # Import global variables
-  globals = import ../nixos/globals.nix;
+{ lib, pkgs, plasma-manager, globals, ... }: let
   username = globals.username;
 in {
   imports = [

@@ -40,9 +40,12 @@
             home-manager.nixosModules.home-manager
             {
               home-manager.users.${username} = {
-                imports = [ ./home.nix ./flatpak.nix ];
+                imports = [ ./home/home.nix ./assets/flatpak.nix ];
               };
-              home-manager.extraSpecialArgs = { inherit plasma-manager; };
+              home-manager.extraSpecialArgs = {
+                inherit plasma-manager;
+                inherit globals;
+              };
               home-manager.backupFileExtension = "backup";
             }
           ];
