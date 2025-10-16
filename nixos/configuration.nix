@@ -1,11 +1,10 @@
 { config, pkgs, lib, ... }:
 
 let
-  # Configure variables.
-  locale = "en_GB.UTF-8";
-  enableNvidiaDrivers = true;
-
-  #Imports apple-color-emoji.nix.
+  # Import global variables.
+  globals = import ./globals.nix;
+  
+  # Import apple-color-emoji.nix.
   appleColorEmoji = import ../flake/assets/apple-color-emoji.nix { inherit pkgs; };
 in
 {
@@ -17,11 +16,11 @@ in
 
   # Configure NVIDIA drivers.
   hardware = {
-    graphics = lib.mkIf enableNvidiaDrivers {
+    graphics = lib.mkIf globals.enableNvidiaDrivers {
       enable = true;
       enable32Bit = true;
     };
-    nvidia = lib.mkIf enableNvidiaDrivers {
+    nvidia = lib.mkIf globals.enableNvidiaDrivers {
       modesetting.enable = true;
       powerManagement.enable = false;
       powerManagement.finegrained = false;
@@ -55,17 +54,17 @@ in
 
   # Define locales.
   i18n = {
-    defaultLocale = "${locale}";
+    defaultLocale = "${globals.locale}";
     extraLocaleSettings = {
-      LC_ADDRESS = "${locale}";
-      LC_IDENTIFICATION = "${locale}";
-      LC_MEASUREMENT = "${locale}";
-      LC_MONETARY = "${locale}";
-      LC_NAME = "${locale}";
-      LC_NUMERIC = "${locale}";
-      LC_PAPER = "${locale}";
-      LC_TELEPHONE = "${locale}";
-      LC_TIME = "${locale}";
+      LC_ADDRESS = "${globals.locale}";
+      LC_IDENTIFICATION = "${globals.locale}";
+      LC_MEASUREMENT = "${globals.locale}";
+      LC_MONETARY = "${globals.locale}";
+      LC_NAME = "${globals.locale}";
+      LC_NUMERIC = "${globals.locale}";
+      LC_PAPER = "${globals.locale}";
+      LC_TELEPHONE = "${globals.locale}";
+      LC_TIME = "${globals.locale}";
     };
   };
 
@@ -73,7 +72,7 @@ in
   services = {
     xserver = {
       enable = true;
-      videoDrivers = lib.mkIf enableNvidiaDrivers [ "nvidia" ];
+      videoDrivers = lib.mkIf globals.enableNvidiaDrivers [ "nvidia" ];
       # Define keymap in X11.
       xkb = {
         layout = "gb";
@@ -186,16 +185,15 @@ in
       gnumake
       git
       alsa-utils
-      appleColorEmoji
-      virt-manager
-    ];
+      appleColorEmoji 
+    ] ++ (lib.optional globals.enableVirtualization virt-manager);
     sessionVariables = {
       GTK_THEME = "Breeze";
     };
   };
 
   # Configure virtualisation, enable libvirt and podman.
-  virtualisation = {
+  virtualisation = lib.mkIf globals.enableVirtualization {
     libvirtd = {
       enable = true;
       qemu = {

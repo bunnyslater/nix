@@ -1,8 +1,10 @@
 { lib, pkgs, ... }: let
-  username = "billie";
+  # Import global variables
+  globals = import ../nixos/globals.nix;
+  username = globals.username;
 in {
   home = {
-    inherit username;
+    username = globals.username;
     homeDirectory = "/home/" + username;
     stateVersion = "25.05";
 
@@ -408,7 +410,7 @@ in {
                   "applications:systemsettings.desktop"
                   "applications:apple-notes.desktop"
                   "applications:org.signal.Signal.desktop"
-                  "applications:virt-manager.desktop"
+                  ] ++ lib.optional globals.enableVirtualization "applications:virt-manager.desktop" ++ [
                   "applications:chromium-browser.desktop"
                   "applications:anki.desktop"
                   "applications:code.desktop"
