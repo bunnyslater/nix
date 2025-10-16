@@ -20,6 +20,7 @@ in {
     homeDirectory = "/home/" + username;
     stateVersion = globals.stateVersion;
 
+    # Defines installed user packages
     packages = with pkgs; [
       (pkgs.catppuccin-kde.override {
         flavour = ["mocha"];
@@ -39,7 +40,7 @@ in {
       tor-browser
     ];
 
-    # Some programs cannot be managed by home-manager directly, so for them we define abitrary files here.
+    # Some programs cannot be managed by home-manager directly, so for them we define abitrary files for them here.
     file = {
       ".config/nixpkgs/config.nix" = {
         text = "{ allowUnfree = true; }";
@@ -52,63 +53,7 @@ in {
     };
   };
 
-  fonts.fontconfig = {
-    enable = true;
-    defaultFonts = {
-      emoji = [ "Apple Color Emoji" ];
-    };
-  };
-
-  systemd.user.services = {
-    autostart-1password = {
-      Unit = {
-        Description = "Start 1Password (silently) at login";
-        PartOf = [ "graphical-session.target" ];
-        After = [ "graphical-session.target" ];
-      };
-      Service = {
-        ExecStart = "${lib.getExe pkgs._1password-gui} --silent";
-        Restart = "on-failure";
-      };
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
-      };
-    };
-    autostart-signal-desktop = {
-      Unit = {
-        Description = "Start Signal Desktop at login";
-        PartOf = [ "graphical-session.target" ];
-        After = [ "graphical-session.target" ];
-      };
-      Service = {
-        ExecStart = "${lib.getExe pkgs.flatpak} run --user org.signal.Signal";
-        Restart = "on-failure";
-      };
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
-      };
-    };
-  };
-  
-  nix = {
-    package = pkgs.nix;
-    extraOptions = "experimental-features = nix-command flakes";
-  };
-
-  gtk = {
-    enable = true;
-    theme = {
-      name = "breeze-gtk";
-    };
-  };
-
-  dconf.settings = {
-    "org/virt-manager/virt-manager/connections" = {
-      autoconnect = ["qemu:///system"];
-      uris = ["qemu:///system"];
-    };
-  };
-
+  # Enables and configures user programs.
   programs = {
     fish = {
       enable = true;
@@ -155,6 +100,69 @@ in {
         pride_month_shown = [];
         pride_month_disable = false;
       };
+    };
+  };
+
+  # Configures systemd user services.
+  ## autostart-* runs programs at login.
+  systemd.user.services = {
+    autostart-1password = {
+      Unit = {
+        Description = "Start 1Password (silently) at login";
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = "${lib.getExe pkgs._1password-gui} --silent";
+        Restart = "on-failure";
+      };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
+    };
+    autostart-signal-desktop = {
+      Unit = {
+        Description = "Start Signal Desktop at login";
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = "${lib.getExe pkgs.flatpak} run --user org.signal.Signal";
+        Restart = "on-failure";
+      };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
+    };
+  };
+
+  # Configures Apple Color Emoji to be the default emoji font.
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts = {
+      emoji = [ "Apple Color Emoji" ];
+    };
+  };
+
+  # Required for flake usage.
+  nix = {
+    package = pkgs.nix;
+    extraOptions = "experimental-features = nix-command flakes";
+  };
+
+  # Configures Breeze to be the default GTK theme.
+  gtk = {
+    enable = true;
+    theme = {
+      name = "breeze-gtk";
+    };
+  };
+
+  # virt-manager uses dconf for some settings storage. This tells virt-manager to make qemu://system avaliable in GUI.
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
     };
   };
 }
