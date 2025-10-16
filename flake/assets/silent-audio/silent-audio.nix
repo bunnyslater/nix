@@ -32,7 +32,7 @@ in {
       executable = true;
     };
     ".local/share/silent-audio/silent.wav" = {
-      source = ./silent-audio/silent.wav;
+      source = ./silent.wav;
     };
   };
 }
