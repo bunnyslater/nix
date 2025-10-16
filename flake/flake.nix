@@ -43,6 +43,7 @@
                 imports = [ ./home.nix ./flatpak.nix ];
               };
               home-manager.extraSpecialArgs = { inherit plasma-manager; };
+              home-manager.backupFileExtension = "backup";
             }
           ];
         };

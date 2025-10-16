@@ -49,7 +49,7 @@ in
   };
   
   # Define time zone.
-  time.timeZone = "Europe/London";
+  time.timeZone = globals.timeZone;
 
   # Define locales.
   i18n = {
@@ -73,10 +73,10 @@ in
       enable = true;
       videoDrivers = lib.mkIf globals.enableNvidiaDrivers [ "nvidia" ];
       # Define keymap in X11.
-      xkb = {
-        layout = "gb";
-        variant = "mac";
-      };
+      xkb = lib.mkMerge [
+        { layout = globals.layout; }
+        (lib.mkIf (globals ? layoutVariant) { variant = globals.layoutVariant; })
+      ];
     };
     # Enable the KDE Plasma Desktop Environment.
     displayManager = {
