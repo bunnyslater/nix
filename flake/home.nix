@@ -47,7 +47,7 @@ in {
         After = [ "graphical-session.target" ];
       };
       Service = {
-        ExecStart = "${pkgs.flatpak}/bin/flatpak run org.signal.Signal";
+        ExecStart = "${lib.getExe pkgs.flatpak} run --user org.signal.Signal";
         Restart = "on-failure";
       };
       Install = {
