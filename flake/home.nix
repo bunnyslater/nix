@@ -10,7 +10,7 @@ in {
   home = {
     username = globals.username;
     homeDirectory = "/home/" + username;
-    stateVersion = "25.05";
+    stateVersion = globals.stateVersion;
 
     packages = with pkgs; [
       (pkgs.catppuccin-kde.override {
@@ -202,6 +202,7 @@ in {
       shellAliases = {
         s = "sudo nixos-rebuild switch";
         hs = "rm ~/.gtkrc-2.0 && cd ~/.config/bunny/flake && home-manager switch --flake .#${username}";
+        update = "sudo nix-channel --update && sudo nixos-rebuild switch && cd ~/.config/bunny/flake && nix flake update && home-manager switch --flake .#${username}";
         tidyup = "nix-collect-garbage -d";
         fastfetch = "hyfetch";
       };
