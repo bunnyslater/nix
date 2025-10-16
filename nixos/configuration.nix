@@ -120,20 +120,6 @@ in
     description = globals.username;
     extraGroups = [ "networkmanager" "wheel" "audio" "libvirtd" ];
     shell = pkgs.fish;
-    packages = with pkgs; [
-      kdePackages.kate
-      kdePackages.filelight
-      ungoogled-chromium
-      _1password-gui
-      anki-bin
-      nextcloud-client
-      vlc
-      libreoffice-qt6-fresh
-      remmina
-      tor-browser
-      transmission_4-qt6
-      eog
-    ];
   };
 
   # Configure security. 
@@ -173,17 +159,18 @@ in
   environment = {
     systemPackages = with pkgs; [
       wget
-      fastfetch
-      hyfetch
-      vopono
       htop
-      mullvad
-      mullvad-vpn
-      home-manager
-      power-profiles-daemon
       gcc
       gnumake
       git
+      home-manager
+      fastfetch
+      hyfetch
+      vopono
+      mullvad
+      mullvad-vpn
+      ungoogled-chromium
+      power-profiles-daemon
       alsa-utils
       appleColorEmoji 
     ] ++ (lib.optional globals.enableVirtualization virt-manager);

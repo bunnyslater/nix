@@ -15,14 +15,23 @@ in {
     homeDirectory = "/home/" + username;
     stateVersion = globals.stateVersion;
 
-    # TODO: Move configuration.nix user packages here.
     packages = with pkgs; [
       (pkgs.catppuccin-kde.override {
         flavour = ["mocha"];
         accents = ["lavender"];
       })
-      kdePackages.breeze-gtk
+      kdePackages.kate
+      kdePackages.filelight
+      eog
+      _1password-gui
+      vlc
+      nextcloud-client
+      libreoffice-qt6-fresh
+      transmission_4-qt6
+      remmina
+      anki-bin
       vscode
+      tor-browser
     ];
 
     # Some programs cannot be managed by home-manager directly, so for them we define abitrary files here.
