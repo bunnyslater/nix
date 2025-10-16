@@ -110,14 +110,14 @@ in
     # Define user profile pictures.
     userProfilePicture = {
       enable = true;
-      users.billie.picture = ../misc/pfp.jpg;
+      users.${globals.username}.picture = ../misc/pfp.jpg;
     };
   };
 
   # Define users' settings and their packages.
-  users.users.billie = {
+  users.users.${globals.username} = {
     isNormalUser = true;
-    description = "billie";
+    description = globals.username;
     extraGroups = [ "networkmanager" "wheel" "audio" "libvirtd" ];
     shell = pkgs.fish;
     packages = with pkgs; [
@@ -142,7 +142,7 @@ in
   security = {
     rtkit.enable = true;
     sudo.extraRules = [
-      { users = [ "billie" ];
+      { users = [ globals.username ];
         commands = [
           { command = "ALL" ;
             options = [ "NOPASSWD" ];
