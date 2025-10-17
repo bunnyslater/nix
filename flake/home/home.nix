@@ -31,7 +31,6 @@ in {
       kdePackages.kate
       kdePackages.filelight
       eog
-      _1password-gui
       vlc
       nextcloud-client
       libreoffice-qt6-fresh

@@ -152,6 +152,11 @@ in
       enable = true;
       enableSSHSupport = true;
     };
+    _1password.enable = true;
+    _1password-gui = {
+      enable = true;
+      polkitPolicyOwners = [ "${globals.username}" ];
+    };
   };
 
   # Define system-wide packages and set default GTK theme to Breeze for them.
