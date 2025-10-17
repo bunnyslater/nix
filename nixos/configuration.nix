@@ -11,6 +11,8 @@ in
   imports =
     [
       ../flake/assets/profile-picture.nix
+      # ./yoga-audio.nix fixes audio on Yoga Pro 9 Gen 3 devices. Remove if unneeded. 
+      ./yoga-audio.nix
     ];
 
   # Configure NVIDIA drivers.
@@ -26,6 +28,7 @@ in
       open = false;
       nvidiaSettings = true;
     };
+    firmware = [ pkgs.sof-firmware ];
   };
   
   # Configure bootloader and modprobe.
@@ -35,8 +38,11 @@ in
       efi.canTouchEfiVariables = true;
     };
     extraModprobeConfig = ''
-      options snd_hda_intel power_save=0
       options kvm_intel nested=1
+      # The below fixes audio on Yoga Pro 9 Gen 3 devices. Remove if unneeded. 
+      options snd_hda_intel power_save=0
+      options snd_intel_dspcfg dsp_driver=1
+      options snd_sof_intel_hda_generic hda_model=17aa:3802
     '';
   };
 
