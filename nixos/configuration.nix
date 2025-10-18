@@ -39,6 +39,8 @@ in
     };
     extraModprobeConfig = ''
       options kvm_intel nested=1
+      # Stubs out my RTX 4060 Mobile for use in virtual machines. You should absolutely remove this.
+      options vfio-pci ids=10de:28e0,10de:22be
       # The below fixes audio on Yoga Pro 9 Gen 3 devices. Remove if unneeded. 
       options snd_hda_intel power_save=0
       options snd_intel_dspcfg dsp_driver=1
@@ -117,6 +119,16 @@ in
       enable = true;
       users.${globals.username}.picture = ../misc/pfp.jpg;
     };
+    # Define evdev configuration. evdev can be used to remap keys and passthrough input devices to VMs.
+    persistent-evdev = {
+      enable = true;
+      devices = {
+        keyboard-main = "usb-Keychron_Keychron_K2_Pro-event-kbd";
+        keyboard-if02 = "usb-Keychron_Keychron_K2_Pro-if02-event-kbd";
+        mouse-keychron = "usb-Keychron_Keychron_K2_Pro-if02-event-mouse";
+        mouse-logitech = "usb-Logitech_USB_Receiver-if02-event-mouse";
+      };
+  };
   };
 
   # Define users' settings and their packages.
@@ -169,7 +181,7 @@ in
   environment = {
     systemPackages = with pkgs; [
       wget
-      htop
+      btop
       gcc
       gnumake
       git
@@ -196,6 +208,19 @@ in
       qemu = {
         runAsRoot = true;
         swtpm.enable = true;
+        verbatimConfig = ''
+          # Allow access to necessary devices
+          cgroup_device_acl = [
+            "/dev/null", "/dev/full", "/dev/zero",
+            "/dev/random", "/dev/urandom",
+            "/dev/ptmx", "/dev/kvm", "/dev/kqemu",
+            "/dev/rtc", "/dev/hpet",
+            "/dev/input/by-id/uinput-keyboard-main",
+            "/dev/input/by-id/uinput-keyboard-if02",
+            "/dev/input/by-id/uinput-mouse-keychron",
+            "/dev/input/by-id/uinput-mouse-logitech",
+          ];
+        '';
       };
     };
     spiceUSBRedirection.enable = true;
