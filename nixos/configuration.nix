@@ -128,7 +128,39 @@ in
         mouse-keychron = "usb-Keychron_Keychron_K2_Pro-if02-event-mouse";
         mouse-logitech = "usb-Logitech_USB_Receiver-if02-event-mouse";
       };
-  };
+    };
+    samba = {
+      enable = true;
+      openFirewall = true;
+      settings = {
+        global = {
+          "workgroup" = "WORKGROUP";
+          "server string" = "smbnix";
+          "netbios name" = "smbnix";
+          "security" = "user";
+          #"use sendfile" = "yes";
+          #"max protocol" = "smb2";
+          # note: localhost is the ipv6 localhost ::1
+          "hosts allow" = "192.168.122. 192.168.8. 127.0.0.1 localhost";
+          "hosts deny" = "0.0.0.0/0";
+          "guest account" = "nobody";
+          "map to guest" = "bad user";
+        };
+        "Home Folder" = {
+          "path" = "/home/${globals.username}";
+          "browseable" = "yes";
+          "read only" = "no";
+          "guest ok" = "no";
+          "create mask" = "0644";
+          "directory mask" = "0755";
+          "force user" = "${globals.username}";
+        };
+      };
+    };
+    samba-wsdd = {
+      enable = true;
+      openFirewall = true;
+    };
   };
 
   # Define users' settings and their packages.
