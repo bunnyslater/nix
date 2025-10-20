@@ -227,7 +227,7 @@ in
       power-profiles-daemon
       alsa-utils
       appleColorEmoji 
-    ] ++ (lib.optional globals.enableVirtualization virt-manager);
+    ] ++ (lib.optionals globals.enableVirtualization [ virt-manager looking-glass-client ]);
     sessionVariables = {
       GTK_THEME = "Breeze";
     };
@@ -274,6 +274,11 @@ in
       appleColorEmoji
     ];
   };
+
+  # Create SHM file required by looking-glass
+  systemd.tmpfiles.rules = lib.mkIf globals.enableVirtualization [
+    "f /dev/shm/looking-glass 0660 ${globals.username} libvirtd -"
+  ];
 
   # Define console keymap.
   console.keyMap = "uk";
