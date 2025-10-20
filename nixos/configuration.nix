@@ -220,6 +220,7 @@ in
       home-manager
       fastfetch
       hyfetch
+      wireguard-tools
       vopono
       mullvad
       mullvad-vpn
@@ -266,6 +267,7 @@ in
   fonts = {
     enableDefaultPackages = false;
     packages = with pkgs; [
+      inter
       dejavu_fonts
       freefont_ttf
       gyre-fonts
