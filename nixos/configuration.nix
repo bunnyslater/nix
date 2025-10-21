@@ -41,10 +41,9 @@ in
       options kvm_intel nested=1
       # Stubs out my RTX 4060 Mobile for use in virtual machines. You should absolutely remove this.
       options vfio-pci ids=10de:28e0,10de:22be
-      # The below fixes audio on Yoga Pro 9 Gen 3 devices. Remove if unneeded. 
-      options snd_hda_intel power_save=0
-      options snd_intel_dspcfg dsp_driver=1
-      options snd_sof_intel_hda_generic hda_model=17aa:3802
+      # The below fixes audio on Yoga Pro 9 Gen 3 devices. You should probably also remove this. 
+      options snd_hda_intel power_save=0 probe_mask=1
+      options snd_sof_intel_hda_common hda_model=alc287-yoga9-14irp8
     '';
   };
 

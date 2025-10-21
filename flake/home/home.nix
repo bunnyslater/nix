@@ -11,7 +11,7 @@ in {
     ./xdg.nix
     # silent-audio fixes audio issues on Yoga Pro 9 14IRP8/16IRP8 devices by creating a systemd service that loops a silent audio file.
     # Unless you are using one of these devices, comment this out.
-    # ../assets/silent-audio/silent-audio.nix
+    ../assets/silent-audio/silent-audio.nix
   ];
 
   # Allow unfree packages.
