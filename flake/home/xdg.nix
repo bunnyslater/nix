@@ -42,6 +42,14 @@ in {
       exec = "${pkgs.ungoogled-chromium}/bin/chromium --app=https://icloud.com/notes";
       icon = "/home/${username}/.config/bunny/misc/apple-notes.ico"; 
     };
+    vlc = {
+      name = "VLC media player";
+      exec = "env QT_AUTO_SCREEN_SCALE_FACTOR=1 QT_ENABLE_HIGHDPI_SCALING=1 vlc %U";
+      icon = "vlc";
+      comment = "VLC media player";
+      categories = [ "AudioVideo" "Player" "Recorder" ];
+      mimeType = [ "video/mpeg" "video/mp4" "audio/mpeg" ];
+    };
   }; 
   mimeApps = {
     enable = true;
