@@ -38,7 +38,7 @@ in {
                   "applications:apple-notes.desktop"
                   "applications:org.signal.Signal.desktop"
                 ] ++ lib.optional globals.enableVirtualization "applications:virt-manager.desktop" ++ [
-                  "applications:chromium-browser.desktop"
+                  "applications:chromium-vopono.desktop"
                   "applications:anki.desktop"
                   "applications:code.desktop"
                 ];

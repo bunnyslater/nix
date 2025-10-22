@@ -64,6 +64,7 @@ in {
         update = "cd ~/.config/bunny/flake && nix flake update && sudo nixos-rebuild switch --flake .#${globals.hostname}";
         tidyup = "nix-collect-garbage -d";
         fastfetch = "hyfetch";
+        vexec = "vopono exec --protocol wireguard --custom .no-osl-wg-003.conf";
       };
       interactiveShellInit = ''
         set fish_greeting

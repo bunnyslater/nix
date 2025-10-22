@@ -42,6 +42,12 @@ in {
       exec = "${pkgs.ungoogled-chromium}/bin/chromium --app=https://icloud.com/notes";
       icon = "/home/${username}/.config/bunny/misc/apple-notes.ico"; 
     };
+    chromium-vopono = {
+      name = "Chromium (Vopono)";
+      exec = "vopono exec --protocol wireguard --custom .no-osl-wg-003.conf ${pkgs.ungoogled-chromium}/bin/chromium %U";
+      icon = "chromium";
+      comment = "Chromium w/ Vopono";
+    };
     vlc = {
       name = "VLC media player";
       exec = "env QT_AUTO_SCREEN_SCALE_FACTOR=1 QT_ENABLE_HIGHDPI_SCALING=1 vlc %U";
