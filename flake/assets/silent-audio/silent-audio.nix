@@ -25,8 +25,8 @@ in {
 
         while true; do
             # loop another audio asynchronously with 1 second delay to prevent speaker dying between the gaps
-          sh -c "sleep 1; aplay /home/${username}/.local/share/silent-audio/silent.wav" &
-          aplay /home/${username}/.local/share/silent-audio/silent.wav
+          ${pkgs.bash}/bin/bash -c "sleep 1; ${pkgs.alsa-utils}/bin/aplay /home/${username}/.local/share/silent-audio/silent.wav" &
+          ${pkgs.alsa-utils}/bin/aplay /home/${username}/.local/share/silent-audio/silent.wav
         done
       '';
       executable = true;
