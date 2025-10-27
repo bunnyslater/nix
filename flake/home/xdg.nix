@@ -29,6 +29,7 @@
     "image/webp" = [ "org.gnome.eog.desktop" ];
     "image/x-icns" = [ "org.gnome.eog.desktop" ];
     "text/plain" = [ "kate.desktop" ];
+    "text/xml" = [ "kate.desktop" ];
     "video/mp4" = [ "vlc.desktop" ];
     "x-scheme-handler/http" = [ "firefox.desktop" ];
     "x-scheme-handler/https" = [ "firefox.desktop" ];
@@ -55,6 +56,13 @@ in {
       comment = "VLC media player";
       categories = [ "AudioVideo" "Player" "Recorder" ];
       mimeType = [ "video/mpeg" "video/mp4" "audio/mpeg" ];
+    };
+    looking-glass-client = {
+      name = "Looking Glass Client";
+      exec = "looking-glass-client -m KEY_CAPSLOCK";
+      icon = "looking-glass";
+      comment = "Client for Looking Glass KVMFR";
+      categories = [ "System" ];
     };
   }; 
   mimeApps = {

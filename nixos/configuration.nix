@@ -281,6 +281,10 @@ in
     "f /dev/shm/looking-glass 0660 ${globals.username} libvirtd -"
   ];
 
+  systemd.extraConfig = ''
+    DefaultTimeoutStopSec=2s
+  '';
+
   # Define console keymap.
   console.keyMap = "uk";
 
