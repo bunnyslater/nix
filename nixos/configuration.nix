@@ -34,7 +34,11 @@ in
   # Configure bootloader and modprobe.
   boot = {
     loader = {
-      systemd-boot.enable = true;
+      timeout = 1;
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 3;
+      }; 
       efi.canTouchEfiVariables = true;
     };
     extraModprobeConfig = ''
@@ -280,10 +284,6 @@ in
   systemd.tmpfiles.rules = lib.mkIf globals.enableVirtualization [
     "f /dev/shm/looking-glass 0660 ${globals.username} libvirtd -"
   ];
-
-  systemd.extraConfig = ''
-    DefaultTimeoutStopSec=2s
-  '';
 
   # Define console keymap.
   console.keyMap = "uk";
