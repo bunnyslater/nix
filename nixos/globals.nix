@@ -4,7 +4,7 @@
   username = "billie";
   hostname = "hermine";
 
-  locale = "en_GB.UTF-8";
+  locale = "fr_FR.UTF-8";
   timeZone = "Europe/London";
   
   # For a list of available XKB layouts, see:

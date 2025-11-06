@@ -29,6 +29,7 @@ in
       nvidiaSettings = true;
     };
     firmware = [ pkgs.sof-firmware ];
+    bluetooth.enable = true;
   };
   
   # Configure bootloader and modprobe.
@@ -66,6 +67,9 @@ in
   i18n = {
     defaultLocale = "${globals.locale}";
     extraLocaleSettings = {
+      LC_CTYPE = "${globals.locale}";
+      LC_COLLATE = "${globals.locale}";
+      LC_MESSAGES = "${globals.locale}";
       LC_ADDRESS = "${globals.locale}";
       LC_IDENTIFICATION = "${globals.locale}";
       LC_MEASUREMENT = "${globals.locale}";
@@ -159,10 +163,6 @@ in
           "force user" = "${globals.username}";
         };
       };
-    };
-    samba-wsdd = {
-      enable = true;
-      openFirewall = true;
     };
   };
 

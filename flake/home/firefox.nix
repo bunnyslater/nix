@@ -123,6 +123,10 @@ in {
         "Value" = false;
         "Type" = "locked";
       };
+      "ui.key.menuAccessKeyFocuses" = {
+        "Value" = false;
+        "Type" = "locked";
+      };
     };
     UserMessaging.MoreFromMozilla = false;
     ReqestedLocales = "en-GB,fr";

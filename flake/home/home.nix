@@ -30,6 +30,7 @@ in {
       })
       kdePackages.kate
       kdePackages.filelight
+      kdePackages.marknote
       eog
       vlc
       nextcloud-client
