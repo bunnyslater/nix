@@ -65,7 +65,7 @@ in {
         update = "cd ~/.config/bunny/flake && nix flake update && sudo nixos-rebuild switch --flake .#${globals.hostname}";
         tidyup = "nix-collect-garbage -d";
         fastfetch = "hyfetch";
-        vexec = "vopono exec --protocol wireguard --custom .no-osl-wg-003.conf";
+        vexec = "vopono exec --protocol wireguard --custom .no-osl-wg-004.conf";
       };
       interactiveShellInit = ''
         set fish_greeting
@@ -117,6 +117,20 @@ in {
       };
       Service = {
         ExecStart = "${lib.getExe pkgs._1password-gui} --silent";
+        Restart = "on-failure";
+      };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
+    };
+    autostart-nextcloud = {
+      Unit = {
+        Description = "Start Nextcloud at login";
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = "${lib.getExe pkgs.nextcloud-client}";
         Restart = "on-failure";
       };
       Install = {

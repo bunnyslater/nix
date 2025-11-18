@@ -113,6 +113,13 @@ in {
       SponsoredPocket = false;
       SponsoredStories = false;
     };
+    FirefoxSuggest = {
+      SponsoredSuggestions = false;
+      ImproveSuggest = false;
+    };
+    GenerativeAI = {
+      Enabled = false;
+    };
     Preferences = {
       "browser.uidensity" = {
         "Value" = 1;

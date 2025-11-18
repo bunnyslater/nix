@@ -228,6 +228,7 @@ in
       mullvad
       mullvad-vpn
       ungoogled-chromium
+      mpv
       power-profiles-daemon
       alsa-utils
       appleColorEmoji 

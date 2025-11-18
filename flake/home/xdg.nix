@@ -45,7 +45,7 @@ in {
     };
     chromium-vopono = {
       name = "Chromium (Vopono)";
-      exec = "vopono exec --protocol wireguard --custom .no-osl-wg-003.conf ${pkgs.ungoogled-chromium}/bin/chromium %U";
+      exec = "vopono exec --protocol wireguard --custom .no-osl-wg-004.conf ${pkgs.ungoogled-chromium}/bin/chromium %U";
       icon = "chromium";
       comment = "Chromium w/ Vopono";
     };
