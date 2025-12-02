@@ -134,9 +134,17 @@ in {
         "Value" = false;
         "Type" = "locked";
       };
+      "browser.translations.neverForLanguages" = {
+        "Value" = "en,fr,en-GB,fr-FR,en-US";
+        "Type" = "locked";
+      };
     };
     UserMessaging.MoreFromMozilla = false;
-    ReqestedLocales = "en-GB,fr";
+    RequestedLocales = [ "fr-FR" "en-GB" ];
   };
+  languagePacks = [
+    "fr-FR"
+    "en-GB"
+  ];
 };
 }
