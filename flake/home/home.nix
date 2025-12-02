@@ -35,6 +35,9 @@ in {
       vlc
       nextcloud-client
       libreoffice-qt6-fresh
+      hunspell
+      hunspellDicts.en_GB-ize
+      hunspellDicts.fr-any
       transmission_4-qt6
       remmina
       anki-bin
