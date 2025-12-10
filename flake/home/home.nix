@@ -1,4 +1,4 @@
-{ lib, pkgs, plasma-manager, globals, ... }: let
+{ lib, pkgs, plasma-manager, globals, config, ... }: let
   username = globals.username;
 in {
   imports = [
@@ -184,4 +184,10 @@ in {
       uris = ["qemu:///system"];
     };
   };
+
+  # Remove GTK2 backup file on activation
+  home.activation.removeGtkBackup = config.lib.dag.entryAfter ["writeBoundary"] ''
+    # Remove stale GTK2 backup if present
+    rm -f "$HOME/.gtkrc-2.0.backup"
+  '';
 }
