@@ -75,7 +75,7 @@ lib.mkIf globals.enableGnome {
       startup-status = 1;
     };
     "org/gnome/Ptyxis" = {
-      font-name = "Hack 11";
+      font-name = "Hack 12";
       use-system-font = false;
     };
   };
