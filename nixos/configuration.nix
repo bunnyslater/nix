@@ -260,9 +260,14 @@ in
       gnome-tweaks
       i2c-tools
     ] ++ (lib.optionals globals.enableVirtualization [ virt-manager looking-glass-client ]);
-    # sessionVariables = {
-    #   GTK_THEME = "Breeze";
-    # };
+      sessionVariables = lib.mkMerge [
+        (lib.mkIf globals.enablePlasma {
+          GTK_THEME = "Breeze";
+        })
+        (lib.mkIf globals.enableGnome {
+          NIXOS_OZONE_WL = "1";
+        })
+      ];
   };
 
   # Configure virtualisation, enable libvirt and podman.
@@ -310,6 +315,26 @@ in
     ];
   };
 
+  environment.gnome = lib.mkIf globals.enableGnome {
+    excludePackages = with pkgs; [
+      gnome-tour
+      gnome-user-docs
+      geary
+      gnome-weather
+      gnome-contacts
+      simple-scan
+      totem
+      gnome-connections
+      yelp
+      gnome-maps
+      epiphany
+      decibels
+      gnome-music
+      showtime
+      gnome-calendar
+    ];
+  };
+
   # Create SHM file required by looking-glass
   systemd.tmpfiles.rules = lib.mkIf globals.enableVirtualization [
     "f /dev/shm/looking-glass 0660 ${globals.username} libvirtd -"
@@ -328,9 +353,5 @@ in
   # networking.firewall.enable = false;
 
   system.stateVersion = globals.stateVersion;
-
-  environment.sessionVariables = lib.mkIf globals.enableGnome {
-    NIXOS_OZONE_WL = "1";
-  };
 
 }
