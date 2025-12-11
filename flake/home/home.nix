@@ -33,7 +33,7 @@ in {
       kdePackages.kate
       kdePackages.filelight
       kdePackages.marknote
-      eog
+      loupe
       vlc
       nextcloud-client
       libreoffice-qt6-fresh

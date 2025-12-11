@@ -23,11 +23,11 @@
     "audio/x-vorbis" = [ "vlc.desktop" ];
     "audio/x-vorbis+ogg" = [ "vlc.desktop" ];
     "audio/x-wav" = [ "vlc.desktop" ];
-    "image/bmp" = lib.mkIf globals.enableGnome [ "loupe.desktop" ] or [ "org.gnome.eog.desktop" ];
-    "image/jpeg" = lib.mkIf globals.enableGnome [ "loupe.desktop" ] or [ "org.gnome.eog.desktop" ];
-    "image/png" = lib.mkIf globals.enableGnome [ "loupe.desktop" ] or [ "org.gnome.eog.desktop" ];
-    "image/webp" = lib.mkIf globals.enableGnome [ "loupe.desktop" ] or [ "org.gnome.eog.desktop" ];
-    "image/x-icns" = lib.mkIf globals.enableGnome [ "loupe.desktop" ] or [ "org.gnome.eog.desktop" ];
+    "image/bmp" = [ "org.gnome.Loupe.desktop" ];
+    "image/jpeg" = [ "org.gnome.Loupe.desktop" ];
+    "image/png" = [ "org.gnome.Loupe.desktop" ];
+    "image/webp" = [ "org.gnome.Loupe.desktop" ];
+    "image/x-icns" = [ "org.gnome.Loupe.desktop" ];
     "text/plain" = [ "kate.desktop" ];
     "text/xml" = [ "kate.desktop" ];
     "video/mp4" = [ "vlc.desktop" ];
