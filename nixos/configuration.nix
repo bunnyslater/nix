@@ -93,13 +93,36 @@ in
         (lib.mkIf (globals ? layoutVariant) { variant = globals.layoutVariant; })
       ];
     };
-    # Enable the KDE Plasma Desktop Environment.
-    displayManager = {
-      sddm.enable = true;
-      sddm.wayland.enable = true;
-      defaultSession = "plasma";
-    };
-    desktopManager.plasma6.enable = true;
+    # Enable the KDE Plasma or GNOME Desktop Environment based on configuration.
+    displayManager = lib.mkMerge [
+      (lib.mkIf globals.enablePlasma {
+        sddm = {
+          enable = true;
+          wayland.enable = true;
+        };
+        defaultSession = "plasma";
+      })
+      (lib.mkIf globals.enableGnome {
+        gdm = {
+          enable = true;
+        };
+        defaultSession = "gnome";
+      })
+    ];
+    desktopManager = lib.mkMerge [
+      (lib.mkIf globals.enablePlasma {
+        plasma6 = { enable = true; };
+      })
+      (lib.mkIf globals.enableGnome {
+        gnome = { 
+          enable = true;
+          extraGSettingsOverrides = ''
+          [org.gnome.mutter]
+          experimental-features=['scale-monitor-framebuffer']
+          '';
+        };
+      })
+    ];
     # Enable CUPS to print documents.
     printing.enable = true;
     # Enable sound with pipewire.
@@ -231,11 +254,12 @@ in
       mpv
       power-profiles-daemon
       alsa-utils
-      appleColorEmoji 
+      appleColorEmoji
+      gnome-tweaks
     ] ++ (lib.optionals globals.enableVirtualization [ virt-manager looking-glass-client ]);
-    sessionVariables = {
-      GTK_THEME = "Breeze";
-    };
+    # sessionVariables = {
+    #   GTK_THEME = "Breeze";
+    # };
   };
 
   # Configure virtualisation, enable libvirt and podman.
@@ -278,6 +302,8 @@ in
       liberation_ttf
       unifont
       appleColorEmoji
+      hack-font
+      adwaita-fonts
     ];
   };
 
@@ -299,5 +325,9 @@ in
   # networking.firewall.enable = false;
 
   system.stateVersion = globals.stateVersion;
+
+  environment.sessionVariables = lib.mkIf globals.enableGnome {
+    NIXOS_OZONE_WL = "1";
+  };
 
 }

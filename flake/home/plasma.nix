@@ -1,6 +1,6 @@
 { lib, globals, username, ... }: let
   username = globals.username;
-in {
+in lib.mkIf globals.enablePlasma {
   programs.plasma = {
     enable = true;
     workspace = {

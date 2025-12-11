@@ -9,6 +9,8 @@ in {
     ./firefox.nix
     # XDG configuration. XDG, among other things, is the standard .desktop files work with, and sets up file associations.
     ./xdg.nix
+    # Gnome configuration. Cursor theme, Adwaita theme, etc.
+    ./gnome.nix
     # silent-audio fixes audio issues on Yoga Pro 9 14IRP8/16IRP8 devices by creating a systemd service that loops a silent audio file.
     # Unless you are using one of these devices, comment this out.
     ../assets/silent-audio/silent-audio.nix
@@ -169,12 +171,14 @@ in {
     settings.experimental-features = [ "nix-command" "flakes" ];
   };
 
-  # Configures Breeze to be the default GTK theme.
+  # Configures GTK theme based on desktop environment.
   gtk = {
     enable = true;
-    theme = {
-      name = "breeze-gtk";
-    };
+    theme = lib.mkMerge [
+      (lib.mkIf globals.enablePlasma {
+        name = "breeze-gtk";
+      })
+    ];
   };
 
   # virt-manager uses dconf for some settings storage. This tells virt-manager to make qemu://system avaliable in GUI.
