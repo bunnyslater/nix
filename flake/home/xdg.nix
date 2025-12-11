@@ -41,7 +41,7 @@ in {
     apple-notes = {
       name = "Apple Notes";
       exec = "${pkgs.ungoogled-chromium}/bin/chromium --app=https://icloud.com/notes";
-      icon = "/home/${username}/.config/bunny/misc/apple-notes.ico"; 
+      icon = "/home/${username}/.config/bunny/misc/apple-notes.svg"; 
     };
     chromium-vopono = {
       name = "Chromium (Vopono)";
