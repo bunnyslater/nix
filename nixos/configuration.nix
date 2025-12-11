@@ -30,6 +30,7 @@ in
     };
     firmware = [ pkgs.sof-firmware ];
     bluetooth.enable = true;
+    i2c.enable = true;
   };
   
   # Configure bootloader and modprobe.
@@ -42,6 +43,7 @@ in
       }; 
       efi.canTouchEfiVariables = true;
     };
+    kernelModules = [ "i2c-dev" ];
     extraModprobeConfig = ''
       options kvm_intel nested=1
       # Stubs out my RTX 4060 Mobile for use in virtual machines. You should absolutely remove this.
@@ -193,7 +195,7 @@ in
   users.users.${globals.username} = {
     isNormalUser = true;
     description = globals.username;
-    extraGroups = [ "networkmanager" "wheel" "audio" "libvirtd" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "libvirtd" "i2c" ];
     shell = pkgs.fish;
   };
 
@@ -256,6 +258,7 @@ in
       alsa-utils
       appleColorEmoji
       gnome-tweaks
+      i2c-tools
     ] ++ (lib.optionals globals.enableVirtualization [ virt-manager looking-glass-client ]);
     # sessionVariables = {
     #   GTK_THEME = "Breeze";

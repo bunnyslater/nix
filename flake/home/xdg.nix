@@ -23,11 +23,11 @@
     "audio/x-vorbis" = [ "vlc.desktop" ];
     "audio/x-vorbis+ogg" = [ "vlc.desktop" ];
     "audio/x-wav" = [ "vlc.desktop" ];
-    "image/bmp" = [ "org.gnome.eog.desktop" ];
-    "image/jpeg" = [ "org.gnome.eog.desktop" ];
-    "image/png" = [ "org.gnome.eog.desktop" ];
-    "image/webp" = [ "org.gnome.eog.desktop" ];
-    "image/x-icns" = [ "org.gnome.eog.desktop" ];
+    "image/bmp" = lib.mkIf globals.enableGnome [ "loupe.desktop" ] or [ "org.gnome.eog.desktop" ];
+    "image/jpeg" = lib.mkIf globals.enableGnome [ "loupe.desktop" ] or [ "org.gnome.eog.desktop" ];
+    "image/png" = lib.mkIf globals.enableGnome [ "loupe.desktop" ] or [ "org.gnome.eog.desktop" ];
+    "image/webp" = lib.mkIf globals.enableGnome [ "loupe.desktop" ] or [ "org.gnome.eog.desktop" ];
+    "image/x-icns" = lib.mkIf globals.enableGnome [ "loupe.desktop" ] or [ "org.gnome.eog.desktop" ];
     "text/plain" = [ "kate.desktop" ];
     "text/xml" = [ "kate.desktop" ];
     "video/mp4" = [ "vlc.desktop" ];
@@ -37,39 +37,39 @@
   };
 in {
   xdg = {
-  desktopEntries = {
-    apple-notes = {
-      name = "Apple Notes";
-      exec = "${pkgs.ungoogled-chromium}/bin/chromium --app=https://icloud.com/notes";
-      icon = "/home/${username}/.config/bunny/misc/apple-notes.svg"; 
+    desktopEntries = {
+      apple-notes = {
+        name = "Apple Notes";
+        exec = "${pkgs.ungoogled-chromium}/bin/chromium --app=https://icloud.com/notes";
+        icon = "/home/${username}/.config/bunny/misc/apple-notes.svg"; 
+      };
+      chromium-vopono = {
+        name = "Chromium (Vopono)";
+        exec = "vopono exec --protocol wireguard --custom .no-osl-wg-004.conf ${pkgs.ungoogled-chromium}/bin/chromium %U";
+        icon = "chromium";
+        comment = "Chromium w/ Vopono";
+      };
+      vlc = {
+        name = "VLC media player";
+        exec = "env QT_AUTO_SCREEN_SCALE_FACTOR=1 QT_ENABLE_HIGHDPI_SCALING=1 vlc %U";
+        icon = "vlc";
+        comment = "VLC media player";
+        categories = [ "AudioVideo" "Player" "Recorder" ];
+        mimeType = [ "video/mpeg" "video/mp4" "audio/mpeg" ];
+      };
+      looking-glass-client = {
+        name = "Looking Glass Client";
+        exec = "looking-glass-client -m KEY_CAPSLOCK";
+        icon = "looking-glass";
+        comment = "Client for Looking Glass KVMFR";
+        categories = [ "System" ];
+      };
+    }; 
+    mimeApps = {
+      enable = true;
+      # Reuse the `associations` variable for both.
+      associations.added = associations;
+      defaultApplications = associations;
     };
-    chromium-vopono = {
-      name = "Chromium (Vopono)";
-      exec = "vopono exec --protocol wireguard --custom .no-osl-wg-004.conf ${pkgs.ungoogled-chromium}/bin/chromium %U";
-      icon = "chromium";
-      comment = "Chromium w/ Vopono";
-    };
-    vlc = {
-      name = "VLC media player";
-      exec = "env QT_AUTO_SCREEN_SCALE_FACTOR=1 QT_ENABLE_HIGHDPI_SCALING=1 vlc %U";
-      icon = "vlc";
-      comment = "VLC media player";
-      categories = [ "AudioVideo" "Player" "Recorder" ];
-      mimeType = [ "video/mpeg" "video/mp4" "audio/mpeg" ];
-    };
-    looking-glass-client = {
-      name = "Looking Glass Client";
-      exec = "looking-glass-client -m KEY_CAPSLOCK";
-      icon = "looking-glass";
-      comment = "Client for Looking Glass KVMFR";
-      categories = [ "System" ];
-    };
-  }; 
-  mimeApps = {
-    enable = true;
-    # Reuse the `associations` variable for both.
-    associations.added = associations;
-    defaultApplications = associations;
-  };
   };
 }
