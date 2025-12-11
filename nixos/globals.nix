@@ -2,7 +2,7 @@
   # Configure variables.
 
   username = "billie";
-  hostname = "vm";
+  hostname = "hermine";
 
   locale = "fr_FR.UTF-8";
   timeZone = "Europe/London";
@@ -19,10 +19,10 @@
   # https://git.kernel.org/pub/scm/linux/kernel/git/legion/kbd.git/tree/data/keymaps
   consoleKeyMap = "uk";
 
-  enablePlasma = false;
-  enableGnome = true;
+  enablePlasma = true;
+  enableGnome = false;
 
-  enableNvidiaDrivers = true;
+  enableNvidiaDrivers = false;
   enableVirtualization = true;
 
   stateVersion = "25.11";

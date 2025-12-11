@@ -33,6 +33,7 @@ in {
       kdePackages.kate
       kdePackages.filelight
       kdePackages.marknote
+      kdePackages.kamoso
       loupe
       vlc
       nextcloud-client
@@ -45,6 +46,8 @@ in {
       anki-bin
       vscode
       tor-browser
+      nicotine-plus
+      picard
     ];
 
     # Some programs cannot be managed by home-manager directly, so for them we define abitrary files for them here.
