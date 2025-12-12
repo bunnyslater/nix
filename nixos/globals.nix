@@ -19,8 +19,8 @@
   # https://git.kernel.org/pub/scm/linux/kernel/git/legion/kbd.git/tree/data/keymaps
   consoleKeyMap = "uk";
 
-  enablePlasma = true;
-  enableGnome = false;
+  enablePlasma = false;
+  enableGnome = true;
 
   enableNvidiaDrivers = false;
   enableVirtualization = true;

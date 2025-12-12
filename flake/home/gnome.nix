@@ -4,7 +4,7 @@ lib.mkIf globals.enableGnome {
   # Configure Gnome desktop environment settings
   dconf.settings = {
     "org/gnome/desktop/interface" = {
-      gtk-theme = "Adwaita";
+      gtk-theme = "adw-gtk3-dark";
       icon-theme = "Adwaita";
       cursor-theme = "Adwaita";
       color-scheme = "prefer-dark";
@@ -25,6 +25,9 @@ lib.mkIf globals.enableGnome {
       switch-applications-backward = [];
       switch-windows = [ "<Alt>Tab" ];
       switch-windows-backward = [ "<Shift><Alt>Tab" ];
+    };
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" ];
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
       binding = "<Control><Alt>t";
@@ -48,6 +51,7 @@ lib.mkIf globals.enableGnome {
         "unblank@sun.wxg@gmail.com"
         "middleclickclose@paolo.tranquilli.gmail.com"
         "clipboard-indicator@tudmotu.com"
+        "adw-gtk3-colorizer@NiffirgkcaJ.github.com"
       ];
       favorite-apps = [
         "org.gnome.Nautilus.desktop"
@@ -81,6 +85,7 @@ lib.mkIf globals.enableGnome {
   };
 
   home.packages = with pkgs; [
+    adw-gtk3
     gnome-shell-extensions
     gnomeExtensions.blur-my-shell
     gnomeExtensions.caffeine
@@ -94,6 +99,7 @@ lib.mkIf globals.enableGnome {
     # gnomeExtensions.one-thing
     gnomeExtensions.unblank
     gnomeExtensions.clipboard-indicator
+    gnomeExtensions.adw-gtk3-colorizer
     ptyxis
     adwaita-icon-theme
     adwaita-icon-theme-legacy
