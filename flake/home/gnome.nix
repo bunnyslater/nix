@@ -11,6 +11,7 @@ lib.mkIf globals.enableGnome {
       accent-color = "purple";
       font-name = "Adwaita Sans 11";
       show-battery-percentage = true;
+      enable-hot-corners = false;
     };
     "org/gnome/desktop/background" = {
       picture-uri = "file:///run/current-system/sw/share/backgrounds/gnome/sheet-l.jxl";
@@ -36,6 +37,9 @@ lib.mkIf globals.enableGnome {
     };
     "org/gnome/desktop/wm/preferences" = {
       resize-with-right-button = true;
+    };
+    "org/gnome/desktop/input-sources" = {
+      xkb-options = [ "compose:rwin" "compose:ralt" "caps:menu" ];
     };
     "org/gnome/shell" = {
       enabled-extensions = [
