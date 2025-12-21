@@ -8,14 +8,15 @@ lib.mkIf globals.enableGnome {
       icon-theme = "Adwaita";
       cursor-theme = "Adwaita";
       color-scheme = "prefer-dark";
-      accent-color = "purple";
-      font-name = "Adwaita Sans 11";
+      accent-color = "blue";
+      font-name = "Inter 11";
       show-battery-percentage = true;
       enable-hot-corners = false;
+      clock-show-weekday = true;
     };
     "org/gnome/desktop/background" = {
-      picture-uri = "file:///run/current-system/sw/share/backgrounds/gnome/sheet-l.jxl";
-      picture-uri-dark = "file:///run/current-system/sw/share/backgrounds/gnome/sheet-d.jxl";
+      picture-uri = "file:///home/${globals.username}/Images/Wallpapers/jens-riesenberg-MdfCeYF-ASA-unsplash.jpg";
+      picture-uri-dark = "file:///home/${globals.username}/Images/Wallpapers/jens-riesenberg-MdfCeYF-ASA-unsplash.jpg";
       primary-color = "#1a5fb4";
       secondary-color = "#000000";
     };
@@ -34,6 +35,9 @@ lib.mkIf globals.enableGnome {
       binding = "<Control><Alt>t";
       command = "${lib.getExe pkgs.ptyxis}";
       name = "Launch Ptyxis";
+    };
+    "org/gnome/settings-daemon/plugins/color" = {
+      night-light-temperature = 3700;
     };
     "org/gnome/desktop/wm/preferences" = {
       resize-with-right-button = true;
