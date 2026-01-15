@@ -1,4 +1,4 @@
-{ lib, globals, username, ... }: let
+{ lib, globals, username, pkgs, ... }: let
   username = globals.username;
 in lib.mkIf globals.enablePlasma {
   programs.plasma = {
@@ -7,7 +7,7 @@ in lib.mkIf globals.enablePlasma {
       lookAndFeel = "org.kde.breezedark.desktop";
       colorScheme = "CatppuccinMochaLavender";
       iconTheme = "breeze-dark";
-      wallpaper = "/home/${username}/.config/bunny/misc/jamie-kettle-CziCVd8c9lU-unsplash copy 2.jpg";
+      wallpaper = "/home/${globals.username}/Images/Wallpapers/jens-riesenberg-MdfCeYF-ASA-unsplash.jpg";
     };
     kscreenlocker.appearance.wallpaper = "/home/${username}/.config/bunny/misc/jamie-kettle-CziCVd8c9lU-unsplash copy 2.jpg";
     panels = [
@@ -65,6 +65,12 @@ in lib.mkIf globals.enablePlasma {
       }
     ];
   };
+  home.packages = with pkgs; [
+    snapshot
+    ddcutil-service
+    xdg-utils
+    ffmpegthumbnailer
+  ];
   home.file.".local/share/konsole/Breeze.colorscheme" = {
   text = ''
     [Background]
@@ -183,44 +189,29 @@ home.file.".local/share/konsole/Profile\ 1.profile" = {
 
 home.file.".config/dolphinrc" = {
   text = ''
-      MenuBar=Disabled
+  MenuBar=Disabled
 
-      [DetailsMode]
-      IconSize=48
-      RightPadding=23
+  [General]
+  EditableUrl=true
+  GlobalViewProps=false
+  ShowStatusBar=FullWidth
+  ShowZoomSlider=true
+  Version=202
+  ViewPropsTimestamp=2026,1,12,16,55,3.111
 
-      [ExtractDialog]
-      1536x960 screen: Height=540
-      1536x960 screen: Width=1024
+  [IconsMode]
+  PreviewSize=224
 
-      [FileDialogSize]
-      2 screens: Height=584
-      2 screens: Width=820
+  [KFileDialog Settings]
+  Places Icons Auto-resize=false
+  Places Icons Static Size=22
 
-      [General]
-      GlobalViewProps=false
-      ShowFullPath=true
-      ShowStatusBar=FullWidth
-      Version=202
-      ViewPropsTimestamp=2025,7,20,15,23,11.818
+  [PreviewSettings]
+  Plugins=svgthumbnail,djvuthumbnail,ebookthumbnail,comicbookthumbnail,exrthumbnail,cursorthumbnail,audiothumbnail,windowsexethumbnail,imagethumbnail,directorythumbnail,opendocumentthumbnail,jpegthumbnail,appimagethumbnail,kraorathumbnail,windowsimagethumbnail,fontthumbnail,mobithumbnail,blenderthumbnail,ffmpegthumbs,gsthumbnail,rawthumbnail,ffmpegthumbnailer
 
-      [IconsMode]
-      IconSize=80
-      PreviewSize=144
-
-      [KFileDialog Settings]
-      Places Icons Auto-resize=false
-      Places Icons Static Size=22
-
-      [PreviewSettings]
-      Plugins=appimagethumbnail,audiothumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,jpegthumbnail,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,opendocumentthumbnail,svgthumbnail,gdk-pixbuf-thumbnailer
-
-      [Search]
-      Location=Everywhere
-
-      [ViewPropertiesDialog]
-      1536x960 screen: Height=714
-      1536x960 screen: Width=379
+  [ViewPropertiesDialog]
+  1536x960 screen: Height=320
+  1536x960 screen: Width=482                  
   '';
 };
 }

@@ -29,12 +29,17 @@ lib.mkIf globals.enableGnome {
       switch-windows-backward = [ "<Shift><Alt>Tab" ];
     };
     "org/gnome/settings-daemon/plugins/media-keys" = {
-      custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" ];
+      custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/" ];
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
       binding = "<Control><Alt>t";
       command = "${lib.getExe pkgs.ptyxis}";
       name = "Launch Ptyxis";
+    };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+      binding = "<Control><Alt>q";
+      command = "firefox https://www.deepl.com/fr/translator";
+      name = "Traduction DeepL";
     };
     "org/gnome/settings-daemon/plugins/color" = {
       night-light-temperature = 3700;
@@ -62,7 +67,7 @@ lib.mkIf globals.enableGnome {
         "adw-gtk3-colorizer@NiffirgkcaJ.github.com"
       ];
       favorite-apps = [
-        "org.gnome.Nautilus.desktop"
+        "org.kde.dolphin.desktop"
         "firefox.desktop"
         "1password.desktop"
         "org.gnome.Ptyxis.desktop"
@@ -118,5 +123,6 @@ lib.mkIf globals.enableGnome {
     adwaita-qt6
     ddcutil-service
     xdg-utils
+    ffmpegthumbnailer
   ];
 }

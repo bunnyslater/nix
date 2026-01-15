@@ -31,6 +31,7 @@
     "text/plain" = [ "kate.desktop" ];
     "text/xml" = [ "kate.desktop" ];
     "video/mp4" = [ "vlc.desktop" ];
+    "video/matroska" = [ "vlc.desktop" ];
     "x-scheme-handler/http" = [ "firefox.desktop" ];
     "x-scheme-handler/https" = [ "firefox.desktop" ];
     "x-scheme-handler/mailto" = [ "firefox.desktop" ];
@@ -41,11 +42,13 @@ in {
       apple-notes = {
         name = "Apple Notes";
         exec = "${pkgs.ungoogled-chromium}/bin/chromium --app=https://icloud.com/notes";
-        icon = "/home/${username}/.config/bunny/misc/apple-notes.svg"; 
+        icon = "/home/${username}/.config/bunny/misc/apple-notes.svg";
+        type = "Application";
+        categories = [ "Utility" "WebBrowser" ];
       };
       chromium-vopono = {
         name = "Chromium (Vopono)";
-        exec = "vopono exec --protocol wireguard --custom .no-osl-wg-004.conf ${pkgs.ungoogled-chromium}/bin/chromium %U";
+        exec = "vopono exec --protocol wireguard --custom .no-osl-wg-003.conf ${pkgs.ungoogled-chromium}/bin/chromium %U";
         icon = "chromium";
         comment = "Chromium w/ Vopono";
       };

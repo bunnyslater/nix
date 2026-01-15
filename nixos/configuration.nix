@@ -304,6 +304,7 @@ in
     enableDefaultPackages = false;
     packages = with pkgs; [
       inter
+      source-han-sans
       dejavu_fonts
       freefont_ttf
       gyre-fonts

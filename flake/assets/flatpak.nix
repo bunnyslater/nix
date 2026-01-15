@@ -3,6 +3,8 @@ let
   grep = pkgs.gnugrep;
   desiredFlatpaks = [
     "org.signal.Signal"
+    "org.kde.dolphin"
+    "it.mijorus.gearlever"
   ];
 in {
   home.activation.flatpakManagement = config.lib.dag.entryAfter ["writeBoundary"] ''
