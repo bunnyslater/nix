@@ -1,0 +1,78 @@
+{ lib, globals, username, pkgs, ... }: let
+  username = globals.username;
+
+  # Define associations in a variable to avoid duplication
+  associations = {
+    "application/pdf" = [ "chromium-browser.desktop" ];
+    "audio/aac" = [ "vlc.desktop" ];
+    "audio/mp4" = [ "vlc.desktop" ];
+    "audio/mpeg" = [ "vlc.desktop" ];
+    "audio/mpegurl" = [ "vlc.desktop" ];
+    "audio/ogg" = [ "vlc.desktop" ];
+    "audio/vnd.rn-realaudio" = [ "vlc.desktop" ];
+    "audio/vorbis" = [ "vlc.desktop" ];
+    "audio/x-flac" = [ "vlc.desktop" ];
+    "audio/x-mp3" = [ "vlc.desktop" ];
+    "audio/x-mpegurl" = [ "vlc.desktop" ];
+    "audio/x-ms-wma" = [ "vlc.desktop" ];
+    "audio/x-musepack" = [ "vlc.desktop" ];
+    "audio/x-oggflac" = [ "vlc.desktop" ];
+    "audio/x-pn-realaudio" = [ "vlc.desktop" ];
+    "audio/x-scpls" = [ "vlc.desktop" ];
+    "audio/x-speex" = [ "vlc.desktop" ];
+    "audio/x-vorbis" = [ "vlc.desktop" ];
+    "audio/x-vorbis+ogg" = [ "vlc.desktop" ];
+    "audio/x-wav" = [ "vlc.desktop" ];
+    "image/bmp" = [ "org.gnome.Loupe.desktop" ];
+    "image/jpeg" = [ "org.gnome.Loupe.desktop" ];
+    "image/png" = [ "org.gnome.Loupe.desktop" ];
+    "image/webp" = [ "org.gnome.Loupe.desktop" ];
+    "image/x-icns" = [ "org.gnome.Loupe.desktop" ];
+    "text/plain" = [ "kate.desktop" ];
+    "text/xml" = [ "kate.desktop" ];
+    "video/mp4" = [ "vlc.desktop" ];
+    "video/matroska" = [ "vlc.desktop" ];
+    "x-scheme-handler/http" = [ "firefox.desktop" ];
+    "x-scheme-handler/https" = [ "firefox.desktop" ];
+    "x-scheme-handler/mailto" = [ "firefox.desktop" ];
+  };
+in {
+  xdg = {
+    desktopEntries = {
+      apple-notes = {
+        name = "Apple Notes";
+        exec = "${pkgs.ungoogled-chromium}/bin/chromium --app=https://icloud.com/notes";
+        icon = "/home/${username}/.config/bunny/misc/apple-notes.svg";
+        type = "Application";
+        categories = [ "Utility" "WebBrowser" ];
+      };
+      chromium-vopono = {
+        name = "Chromium (Vopono)";
+        exec = "vopono exec --protocol wireguard --custom .no-osl-wg-003.conf ${pkgs.ungoogled-chromium}/bin/chromium %U";
+        icon = "chromium";
+        comment = "Chromium w/ Vopono";
+      };
+      vlc = {
+        name = "VLC media player";
+        exec = "env QT_AUTO_SCREEN_SCALE_FACTOR=1 QT_ENABLE_HIGHDPI_SCALING=1 vlc %U";
+        icon = "vlc";
+        comment = "VLC media player";
+        categories = [ "AudioVideo" "Player" "Recorder" ];
+        mimeType = [ "video/mpeg" "video/mp4" "audio/mpeg" ];
+      };
+      looking-glass-client = {
+        name = "Looking Glass Client";
+        exec = "looking-glass-client -m KEY_CAPSLOCK";
+        icon = "looking-glass";
+        comment = "Client for Looking Glass KVMFR";
+        categories = [ "System" ];
+      };
+    }; 
+    mimeApps = {
+      enable = true;
+      # Reuse the `associations` variable for both.
+      associations.added = associations;
+      defaultApplications = associations;
+    };
+  };
+}

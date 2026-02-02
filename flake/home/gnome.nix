@@ -1,0 +1,129 @@
+{ config, lib, pkgs, globals, ... }:
+
+lib.mkIf globals.enableGnome {
+  # Configure Gnome desktop environment settings
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      gtk-theme = "adw-gtk3-dark";
+      icon-theme = "Adwaita";
+      cursor-theme = "Adwaita";
+      color-scheme = "prefer-dark";
+      accent-color = "blue";
+      font-name = "Inter 11";
+      show-battery-percentage = true;
+      enable-hot-corners = false;
+      clock-show-weekday = true;
+    };
+    "org/gnome/desktop/background" = {
+      picture-uri = "file:///home/${globals.username}/Images/Wallpapers/jens-riesenberg-MdfCeYF-ASA-unsplash.jpg";
+      picture-uri-dark = "file:///home/${globals.username}/Images/Wallpapers/jens-riesenberg-MdfCeYF-ASA-unsplash.jpg";
+      primary-color = "#1a5fb4";
+      secondary-color = "#000000";
+    };
+    "org/gnome/desktop/wm/keybindings" = {
+      close = [ "<Shift><Super>q" ];
+      minimize = [ "<Super>m" ];
+      switch-applications = [];
+      switch-applications-backward = [];
+      switch-windows = [ "<Alt>Tab" ];
+      switch-windows-backward = [ "<Shift><Alt>Tab" ];
+    };
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/" ];
+    };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+      binding = "<Control><Alt>t";
+      command = "${lib.getExe pkgs.ptyxis}";
+      name = "Launch Ptyxis";
+    };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+      binding = "<Control><Alt>q";
+      command = "firefox https://www.deepl.com/fr/translator";
+      name = "Traduction DeepL";
+    };
+    "org/gnome/settings-daemon/plugins/color" = {
+      night-light-temperature = 3700;
+    };
+    "org/gnome/desktop/wm/preferences" = {
+      resize-with-right-button = true;
+      button-layout = "appmenu:minimize,maximize,close";
+    };
+    "org/gnome/desktop/input-sources" = {
+      xkb-options = [ "compose:rwin" "compose:ralt" "caps:menu" ];
+    };
+    "org/gnome/shell" = {
+      enabled-extensions = [
+        "user-theme@gnome-shell-extensions.gcampax.github.com"
+        "blur-my-shell@aunetx"
+        "caffeine@patapon.info"
+        "hotedge@jonathan.jdoda.ca"
+        "display-adjustment@w8jcik.gitlab.com"
+        "appindicatorsupport@rgcjonas.gmail.com"
+        "emoji-copy@felipeftn"
+        "just-perfection-desktop@just-perfection"
+        "appnameindicator@dev64.xyz"
+        "unblank@sun.wxg@gmail.com"
+        "middleclickclose@paolo.tranquilli.gmail.com"
+        "clipboard-indicator@tudmotu.com"
+        "adw-gtk3-colorizer@NiffirgkcaJ.github.com"
+      ];
+      favorite-apps = [
+        "org.kde.dolphin.desktop"
+        "firefox.desktop"
+        "1password.desktop"
+        "org.gnome.Ptyxis.desktop"
+        "org.gnome.Settings.desktop"
+        "apple-notes.desktop"
+        "org.signal.Signal.desktop"
+        "virt-manager.desktop"
+        "chromium-vopono.desktop"
+        "anki.desktop"
+        "code.desktop"
+      ];
+    };
+    "org/gnome/shell/keybindings" = {
+      show-screenshot-ui = [ "<Shift><Super>s" ];
+    };
+    "org/gnome/shell/extensions/hot-edge" = {
+      show-animation = false;
+    };
+    "org/gnome/shell/extensions/just-perfection" = {
+      window-demands-attention-focus = true;
+      animation = 4;
+      startup-status = 1;
+    };
+    "org/gnome/Ptyxis" = {
+      font-name = "Hack 12";
+      use-system-font = false;
+    };
+  };
+
+  home.packages = with pkgs; [
+    adw-gtk3
+    gnome-shell-extensions
+    gnomeExtensions.blur-my-shell
+    gnomeExtensions.caffeine
+    gnomeExtensions.displays-adjustments
+    gnomeExtensions.hot-edge
+    gnomeExtensions.appindicator
+    gnomeExtensions.emoji-copy
+    gnomeExtensions.just-perfection
+    gnomeExtensions.app-name-indicator
+    gnomeExtensions.middle-click-to-close-in-overview
+    # gnomeExtensions.one-thing
+    gnomeExtensions.unblank
+    gnomeExtensions.clipboard-indicator
+    gnomeExtensions.adw-gtk3-colorizer
+    ptyxis
+    adwaita-icon-theme
+    adwaita-icon-theme-legacy
+    morewaita-icon-theme
+    gnome-themes-extra
+    libadwaita
+    adwaita-qt
+    adwaita-qt6
+    ddcutil-service
+    xdg-utils
+    ffmpegthumbnailer
+  ];
+}
