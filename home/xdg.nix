@@ -1,6 +1,4 @@
-{ lib, globals, username, pkgs, ... }: let
-  username = globals.username;
-
+{ lib, pkgs, ... }: let
   # Define associations in a variable to avoid duplication
   associations = {
     "application/pdf" = [ "chromium-browser.desktop" ];
@@ -42,7 +40,7 @@ in {
       apple-notes = {
         name = "Apple Notes";
         exec = "${pkgs.ungoogled-chromium}/bin/chromium --app=https://icloud.com/notes";
-        icon = "/home/${username}/.config/bunny/misc/apple-notes.svg";
+        icon = "/home/billie/.config/bunny/misc/apple-notes.svg";
         type = "Application";
         categories = [ "Utility" "WebBrowser" ];
       };

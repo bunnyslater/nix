@@ -1,6 +1,5 @@
-{ config, lib, pkgs, globals, ... }:
-
-lib.mkIf globals.enableGnome {
+{ config, lib, pkgs, ... }:
+{
   # Configure Gnome desktop environment settings
   dconf.settings = {
     "org/gnome/desktop/interface" = {
@@ -15,8 +14,8 @@ lib.mkIf globals.enableGnome {
       clock-show-weekday = true;
     };
     "org/gnome/desktop/background" = {
-      picture-uri = "file:///home/${globals.username}/Images/Wallpapers/jens-riesenberg-MdfCeYF-ASA-unsplash.jpg";
-      picture-uri-dark = "file:///home/${globals.username}/Images/Wallpapers/jens-riesenberg-MdfCeYF-ASA-unsplash.jpg";
+      picture-uri = "file:///home/billie/Images/Wallpapers/jens-riesenberg-MdfCeYF-ASA-unsplash.jpg";
+      picture-uri-dark = "file:///home/billie/Images/Wallpapers/jens-riesenberg-MdfCeYF-ASA-unsplash.jpg";
       primary-color = "#1a5fb4";
       secondary-color = "#000000";
     };

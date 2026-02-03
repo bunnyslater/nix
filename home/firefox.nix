@@ -1,5 +1,4 @@
-{ lib, globals, username, pkgs, ... }: let
-  username = globals.username;
+{ lib, pkgs, ... }: let
 in {
   # Configures:
   ### Extensions, including: 

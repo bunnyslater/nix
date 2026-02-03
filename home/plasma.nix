@@ -1,6 +1,21 @@
 { lib, globals, username, pkgs, ... }: let
   username = globals.username;
-in lib.mkIf globals.enablePlasma {
+in {
+
+  imports = [
+    plasma-manager.homeModules.plasma-manager
+  ];
+
+  # Configures Breeze GTK theme.
+  gtk = {
+    enable = true;
+    theme = lib.mkMerge [
+      (lib.mkIf globals.enablePlasma {
+        name = "breeze-gtk";
+      })
+    ];
+  };
+
   programs.plasma = {
     enable = true;
     workspace = {
@@ -14,14 +29,9 @@ in lib.mkIf globals.enablePlasma {
       {
         location = "bottom";
         floating = false;
-        # opacity = "translucent";
+        opacity = "translucent";
         height = 28;
         widgets = [
-          # We can configure the widgets by adding the name and config
-          # attributes. For example to add the the kickoff widget and set the
-          # icon to "nix-snowflake-white" use the below configuration. This will
-          # add the "icon" key to the "General" group for the widget in
-          # ~/.config/plasma-org.kde.plasma.desktop-appletsrc.
           {
             name = "org.kde.plasma.kickoff";
           }
@@ -37,7 +47,7 @@ in lib.mkIf globals.enablePlasma {
                   "applications:systemsettings.desktop"
                   "applications:apple-notes.desktop"
                   "applications:org.signal.Signal.desktop"
-                ] ++ lib.optional globals.enableVirtualization "applications:virt-manager.desktop" ++ [
+                  "applications:virt-manager.desktop"
                   "applications:chromium-vopono.desktop"
                   "applications:anki.desktop"
                   "applications:code.desktop"
@@ -66,6 +76,10 @@ in lib.mkIf globals.enablePlasma {
     ];
   };
   home.packages = with pkgs; [
+    (pkgs.catppuccin-kde.override {
+      flavour = ["mocha"];
+      accents = ["lavender"];
+    })
     snapshot
     ddcutil-service
     xdg-utils
