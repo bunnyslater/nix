@@ -25,7 +25,7 @@ in
   };
 
   # Hostname
-  networking.hostName = "vm";
+  networking.hostName = "chiot";
 
   # Define time zone.
   time.timeZone = timeZone;
