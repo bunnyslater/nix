@@ -17,6 +17,7 @@ in
     ./hardware-configuration.nix
     ../../modules/baseline.nix
     ../../modules/gnome.nix
+    ../../modules/flatpak.nix
   ];
 
   workstation = {

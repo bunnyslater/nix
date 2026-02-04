@@ -13,9 +13,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, plasma-manager, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, plasma-manager, nix-flatpak, ... }:
     let
       system = "x86_64-linux";
       appleColorEmojiOverlay = final: prev: {
@@ -34,6 +37,7 @@
           modules = [
             deviceModule
             home-manager.nixosModules.home-manager
+            nix-flatpak.nixosModules.nix-flatpak
             {
               home-manager = {
                 useGlobalPkgs = true;
@@ -56,7 +60,6 @@
               ./home/common.nix
               ./home/gnome.nix
               ./home/systemd.nix
-              ./assets/flatpak.nix
             ];
           };
           chiot = mkWorkstation {
@@ -64,14 +67,7 @@
             hmImports = [
               ./home/common.nix
               ./home/gnome.nix
-              ./assets/flatpak.nix
             ];
-          };
-        };
-        homeConfigurations = {
-          "billie" = home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            modules = [ ./home.nix ./flatpak.nix plasma-manager.homeModules.plasma-manager ];
           };
         };
         packages.x86_64-linux = {
