@@ -59,6 +59,14 @@
               ./assets/flatpak.nix
             ];
           };
+          chiot = mkWorkstation {
+            deviceModule = ./hardware/chiot/default.nix;
+            hmImports = [
+              ./home/common.nix
+              ./home/gnome.nix
+              ./assets/flatpak.nix
+            ];
+          };
         };
         homeConfigurations = {
           "billie" = home-manager.lib.homeManagerConfiguration {
