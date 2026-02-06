@@ -30,6 +30,7 @@
 
     # Defines installed user packages
     packages = with pkgs; [
+      kdePackages.dolphin
       kdePackages.kate
       kdePackages.filelight
       loupe
