@@ -73,6 +73,8 @@ in
     };
   };
 
-  hardware.sensor.iio.enable = true;
-  
+  hardware = {
+    sensor.iio.enable = true;
+  };
+
 }
