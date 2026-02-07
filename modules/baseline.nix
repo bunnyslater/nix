@@ -7,12 +7,12 @@
 }:
 let
   # Import apple-color-emoji.nix.
-  appleColorEmoji = import ../assets/apple-color-emoji.nix { inherit pkgs; };
+  appleColorEmoji = import ./apple-color-emoji.nix { inherit pkgs; };
   
   cfg = config.workstation.baseline;
 in
 {
-  imports = [ ../assets/profile-picture.nix ];
+  imports = [ ./profile-picture.nix ];
 
   options.workstation.baseline.enable = lib.mkEnableOption "Baseline workstation configuration";
 
