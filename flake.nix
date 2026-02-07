@@ -69,6 +69,15 @@
               ./home/gnome.nix
             ];
           };
+          hermine = mkWorkstation {
+            deviceModule = ./hardware/hermine/default.nix;
+            hmImports = [
+              ./home/common.nix
+              ./home/gnome.nix
+              ./home/systemd.nix
+              ./home/silent-audio/silent-audio.nix
+            ];
+          };
         };
         packages.x86_64-linux = {
           apple-color-emoji = pkgs.apple-color-emoji;
