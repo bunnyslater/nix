@@ -78,6 +78,13 @@
               ./home/silent-audio/silent-audio.nix
             ];
           };
+          x390 = mkWorkstation {
+            deviceModule = ./hardware/x390/default.nix;
+            hmImports = [
+              ./home/common.nix
+              ./home/gnome.nix
+            ];
+          };
         };
         packages.x86_64-linux = {
           apple-color-emoji = pkgs.apple-color-emoji;
