@@ -17,10 +17,20 @@ in
   options.workstation.baseline.enable = lib.mkEnableOption "Baseline workstation configuration";
 
   config = lib.mkIf cfg.enable {
-    nix.settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+
+    nix = {      
+      settings.experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "-d";
+      };
+      optimise.automatic = true;
+    };
+
 
     nixpkgs.config.allowUnfree = true;
 
