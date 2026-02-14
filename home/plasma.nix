@@ -1,18 +1,17 @@
-{ lib, globals, username, pkgs, ... }: let
-  username = globals.username;
+{ lib, pkgs, inputs, ... }: let
 in {
 
   imports = [
-    plasma-manager.homeModules.plasma-manager
+    inputs.plasma-manager.homeManagerModules.plasma-manager
   ];
 
   # Configures Breeze GTK theme.
   gtk = {
     enable = true;
     theme = lib.mkMerge [
-      (lib.mkIf globals.enablePlasma {
+      {
         name = "breeze-gtk";
-      })
+      }
     ];
   };
 
@@ -22,9 +21,9 @@ in {
       lookAndFeel = "org.kde.breezedark.desktop";
       colorScheme = "CatppuccinMochaLavender";
       iconTheme = "breeze-dark";
-      wallpaper = "/home/${globals.username}/Images/Wallpapers/jens-riesenberg-MdfCeYF-ASA-unsplash.jpg";
+      wallpaper = "/home/billie/Images/Wallpapers/jens-riesenberg-MdfCeYF-ASA-unsplash.jpg";
     };
-    kscreenlocker.appearance.wallpaper = "/home/${username}/.config/bunny/misc/jamie-kettle-CziCVd8c9lU-unsplash copy 2.jpg";
+    kscreenlocker.appearance.wallpaper = "/home/billie/.config/bunny/misc/jamie-kettle-CziCVd8c9lU-unsplash copy 2.jpg";
     panels = [
       {
         location = "bottom";
