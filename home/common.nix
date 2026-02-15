@@ -31,6 +31,9 @@
     # Defines installed user packages
     packages = with pkgs; [
       kdePackages.dolphin
+      kdePackages.kio 
+      kdePackages.kio-fuse 
+      kdePackages.kio-extras
       kdePackages.kate
       kdePackages.filelight
       loupe
