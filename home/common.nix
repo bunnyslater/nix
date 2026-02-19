@@ -34,6 +34,7 @@
       kdePackages.kio 
       kdePackages.kio-fuse 
       kdePackages.kio-extras
+      kdePackages.xdg-desktop-portal-kde
       kdePackages.kate
       kdePackages.filelight
       loupe
