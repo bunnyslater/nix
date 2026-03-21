@@ -72,6 +72,7 @@
         "1password.desktop"
         "org.gnome.Ptyxis.desktop"
         "org.gnome.Settings.desktop"
+        "org.gnome.Calendar.desktop"
         "apple-notes.desktop"
         "org.signal.Signal.desktop"
         "virt-manager.desktop"

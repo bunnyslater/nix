@@ -47,7 +47,6 @@ in
           decibels
           gnome-music
           showtime
-          gnome-calendar
         ];
       };
       sessionVariables = {
