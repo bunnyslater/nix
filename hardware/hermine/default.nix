@@ -29,6 +29,9 @@ in
   # Hostname
   networking.hostName = "hermine";
 
+  # Wireguard (TODO: make declaritive)
+  # networking.wg-quick.interfaces.wg0.configFile = "/home/billie/.home.conf";
+
   # Define time zone.
   time.timeZone = timeZone;
 
