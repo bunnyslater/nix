@@ -86,6 +86,18 @@ in
     '';
   };
 
+  # Sunshine
+  services.sunshine = {
+    enable = true;
+    autoStart = true;  # optional: starts Sunshine automatically on login
+    capSysAdmin = true;
+    openFirewall = true;
+  };
 
+  # Enables the uinput kernel module and creates the uinput group
+  hardware.uinput.enable = true;
+
+  # Adds user to the uinput group
+  users.users.billie.extraGroups = [ "uinput" ];
 
 }
