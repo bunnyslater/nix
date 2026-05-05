@@ -13,7 +13,6 @@
   # Add here the flatpaks you want to install
   services.flatpak.packages = [
     "org.signal.Signal"
-    "it.mijorus.gearlever"
     #{ appId = "com.brave.Browser"; origin = "flathub"; }
     #"com.obsproject.Studio"
     #"im.riot.Riot"
