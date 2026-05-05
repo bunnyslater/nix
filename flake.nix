@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -16,13 +17,22 @@
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
+    helium = {
+      url = "github:schembriaiden/helium-browser-nix-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, plasma-manager, nix-flatpak, ... }:
+  outputs = inputs@{ nixpkgs, nixpkgs-unstable, home-manager, plasma-manager, nix-flatpak, ... }:
     let
       system = "x86_64-linux";
       appleColorEmojiOverlay = final: prev: {
         apple-color-emoji = final.callPackage ./modules/apple-color-emoji.nix { };
+      };
+      pkgs-unstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
       };
       pkgs = import nixpkgs {
         inherit system;
@@ -33,7 +43,7 @@
         { deviceModule, hmImports }:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs; pkgs_unstable = pkgs-unstable; };
           modules = [
             deviceModule
             home-manager.nixosModules.home-manager
@@ -43,7 +53,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 backupFileExtension = "backup";
-                extraSpecialArgs = { inherit inputs; };
+                extraSpecialArgs = { inherit inputs; pkgs_unstable = pkgs-unstable; };
                 users.billie = {
                   imports = hmImports;
                 };

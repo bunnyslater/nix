@@ -200,6 +200,7 @@ in
         vopono
         mullvad
         mullvad-vpn
+        inputs.helium.packages.${system}.default
         ungoogled-chromium
         mpv
         power-profiles-daemon
