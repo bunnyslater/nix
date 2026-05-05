@@ -51,6 +51,8 @@
       nicotine-plus
       picard
       opencode
+      apx
+      apx-gui
     ];
 
     # Some programs cannot be managed by home-manager directly, so for them we define abitrary files for them here.
@@ -77,6 +79,8 @@
         tidyup = "nix-collect-garbage -d";
         fastfetch = "hyfetch";
         vexec = "vopono exec --protocol wireguard --custom .no-osl-wg-004.conf";
+        omp = "apx debian run /home/billie/.local/bin/omp";
+        pi = "apx debian run /home/billie/.local/bin/omp";
       };
       interactiveShellInit = ''
         set fish_greeting
@@ -95,6 +99,7 @@
           set_color normal
         end
       '';
+
     };
     git = {
       enable = true;
