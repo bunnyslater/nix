@@ -22,11 +22,28 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
+    nix-darwin = {
+      url = "github:lnl7/nix-darwin/nix-darwin-25.11";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
+    };
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
   };
 
-  outputs = inputs@{ nixpkgs, nixpkgs-unstable, home-manager, plasma-manager, nix-flatpak, ... }:
+  outputs = inputs@{ nixpkgs, nixpkgs-unstable, home-manager, plasma-manager, nix-flatpak, nix-darwin, nix-homebrew, ... }:
     let
       system = "x86_64-linux";
+      darwinSystem = "aarch64-darwin";
+      darwinHostname = "bs-Virtual-Machine";
+      darwinUsername = "b";
       appleColorEmojiOverlay = final: prev: {
         apple-color-emoji = final.callPackage ./modules/apple-color-emoji.nix { };
       };
@@ -98,6 +115,22 @@
         };
         packages.x86_64-linux = {
           apple-color-emoji = pkgs.apple-color-emoji;
+        };
+
+        darwinConfigurations."bs-Virtual-Machine" = nix-darwin.lib.darwinSystem {
+          system = darwinSystem;
+          specialArgs = inputs // {
+            username = darwinUsername;
+            hostname = darwinHostname;
+          };
+          modules = [
+            nix-homebrew.darwinModules.nix-homebrew
+            ./darwin/nix-core.nix
+            ./darwin/system.nix
+            ./darwin/apps.nix
+            ./darwin/homebrew.nix
+            ./darwin/host-users.nix
+          ];
         };
     };
 }
