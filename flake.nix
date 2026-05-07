@@ -125,11 +125,13 @@
           };
           modules = [
             nix-homebrew.darwinModules.nix-homebrew
+            home-manager.darwinModules.home-manager
             ./darwin/nix-core.nix
             ./darwin/system.nix
             ./darwin/apps.nix
             ./darwin/homebrew.nix
             ./darwin/host-users.nix
+            ./darwin/home.nix
           ];
         };
     };

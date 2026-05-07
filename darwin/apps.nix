@@ -17,7 +17,7 @@
     taps = builtins.attrNames config.nix-homebrew.taps;
 
     # `brew install`
-    brews = [];
+    brews = [ "fastfetch" "fish" "hyfetch" ];
 
     # `brew install --cask`
     casks = [];
