@@ -22,4 +22,15 @@
   # Uses the Homebrew fish since the nix-built fish binary is killed by
   # macOS in this VM environment.
   environment.shells = [ pkgs.zsh pkgs.bash "/opt/homebrew/bin/fish" ];
+
+  # Set wallpaper using osascript/Finder
+  launchd.user.agents.setWallpaper = {
+    command = "/usr/bin/osascript -e 'tell application \"Finder\" to set desktop picture to POSIX file \"/Users/${username}/Pictures/Wallpapers/art002e009285~large.jpg\"'";
+    serviceConfig = {
+      RunAtLoad = true;
+      KeepAlive = false;
+      StandardOutPath = "/tmp/setWallpaper.log";
+      StandardErrorPath = "/tmp/setWallpaper.err";
+    };
+  };
 }
