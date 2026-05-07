@@ -20,6 +20,6 @@
     brews = [ "fastfetch" "fish" "hyfetch" ];
 
     # `brew install --cask`
-    casks = [];
+    casks = [ "desktoppr" "1password" "iterm2" "anki" "cardinal-search" "dockdoor" "easy-move+resize" "fastmail" "grandperspective" "helium-browser" "hiddenbar" "jan" "karabiner-elements" "keyboardcleantool" "libreoffice" "middleclick" "moonlight" "mullvad-vpn" "musicbrainz-picard" "neohtop" "nextcloud" "pearcleaner" "prismlauncher" "rectangle" "scroll-reverser" "signal" "stats" "textmate" "transmission" "trex" "utm" "vlc" "zed" ];
   };
 }

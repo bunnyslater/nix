@@ -19,6 +19,7 @@
           fish_add_path /run/current-system/sw/bin
           fish_add_path /nix/var/nix/profiles/default/bin
           fish_add_path /opt/homebrew/bin
+          fish_add_path /Users/${username}/.local/bin
         '';
         shellAliases = {
           s = "sudo darwin-rebuild switch --flake ~/.config/bunny#${hostname}";
