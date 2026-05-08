@@ -9,7 +9,7 @@
         autohide = true;
         autohide-delay = 0.0;
         autohide-time-modifier = 0.0;
-        tilesize = 54;
+        tilesize = 52;
         show-recents = false;
         showhidden = true;
         mineffect = "scale";
@@ -28,10 +28,10 @@
           "/System/Applications/System Settings.app"
         ];
         persistent-others = [
-          "/Applications"
-          "/Users/${username}/Nextcloud/Screenshots"
-          "/Users/${username}/Documents"
-          "/Users/${username}/Downloads"
+          { folder = { path = "/Applications"; showas = "grid"; displayas = "folder"; }; }
+          { folder = { path = "/Users/${username}/Nextcloud/Screenshots"; showas = "grid"; displayas = "folder"; }; }
+          { folder = { path = "/Users/${username}/Documents"; showas = "grid"; displayas = "folder"; }; }
+          { folder = { path = "/Users/${username}/Downloads"; displayas = "folder"; }; }
         ];
       };
       finder = {
