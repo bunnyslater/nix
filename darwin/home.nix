@@ -11,6 +11,10 @@
         stateVersion = "25.11";
       };
 
+      imports = [ ./iterm2.nix ];
+
+      fonts.fontconfig.enable = true;
+
       programs.fish = {
         enable = true;
 
