@@ -12,6 +12,7 @@
         tilesize = 54;
         show-recents = false;
         showhidden = true;
+        mineffect = "scale";
         persistent-apps = [
           "/Applications/Helium.app"
           "/Applications/1Password.app"
@@ -40,6 +41,7 @@
         FXDefaultSearchScope = "SCcf";
         ShowStatusBar = true;
         ShowPathbar = true;
+        AppleShowAllExtensions = true;
       };
     };
   };
@@ -82,5 +84,35 @@
 
     # Restart Finder to apply
     /usr/bin/killall Finder 2>/dev/null || true
+  '';
+
+  # Configure screenshots location
+  system.activationScripts.configureScreenshots.text = ''
+    /usr/bin/mkdir -p "/Users/${username}/Nextcloud/Screenshots"
+    /usr/bin/defaults write com.apple.screencapture location -string "/Users/${username}/Nextcloud/Screenshots"
+    /usr/bin/killall SystemUIServer 2>/dev/null || true
+  '';
+
+  # Configure mouse settings
+  system.activationScripts.configureMouse.text = ''
+    # Disable mouse acceleration (linear = 1 means no acceleration)
+    /usr/bin/defaults write .GlobalPreferences com.apple.mouse.linear -bool true
+
+    # Set mouse speed (scaling) to 0.875
+    /usr/bin/defaults write .GlobalPreferences com.apple.mouse.scaling -float 0.875
+
+    # Set click weight (FirstClickThreshold) to 2
+    /usr/bin/defaults write .GlobalPreferences com.apple.mouse.firstClickThreshold -int 2
+
+    # HID Mouse scroll settings
+    /usr/bin/defaults write com.apple.driver.AppleHIDMouse ScrollH -int 1
+    /usr/bin/defaults write com.apple.driver.AppleHIDMouse ScrollS -int 4
+    /usr/bin/defaults write com.apple.driver.AppleHIDMouse ScrollSSize -int 30
+    /usr/bin/defaults write com.apple.driver.AppleHIDMouse ScrollV -int 1
+  '';
+
+  # Disable Apple Intelligence
+  system.activationScripts.disableAppleIntelligence.text = ''
+    /usr/bin/defaults write com.apple.CloudSubscriptionFeatures.optIn "545129924" -bool false
   '';
 }
