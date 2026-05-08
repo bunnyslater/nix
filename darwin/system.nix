@@ -1,6 +1,11 @@
 { pkgs, username, ... }: {
   # https://daiderd.com/nix-darwin/manual/index.html#sec-options
 
+  programs = {
+    _1password.enable = true;
+    _1password-gui.enable = true;
+  };
+
   system = {
     stateVersion = 6;
     defaults = {
