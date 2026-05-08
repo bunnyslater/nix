@@ -1,9 +1,7 @@
 { config, lib, ... }:
 
 let
-  guid = "3863096B-F827-400E-A4B6-CEF611766225";
-  profile = {
-    "Guid" = guid;
+  baseProfile = {
     "Ansi 7 Color (Light)" = {
       "Red Component" = 0.65098039215686276;
       "Color Space" = "sRGB";
@@ -61,7 +59,6 @@ let
       "Alpha Component" = 1;
       "Green Component" = 0.97999999999999998;
     };
-    "Columns" = 143;
     "Ansi 8 Color" = {
       "Red Component" = 0.40781760215759277;
       "Color Space" = "sRGB";
@@ -186,7 +183,7 @@ let
       "Green Component" = 0.11764705882352941;
     };
     "Silence Bell" = false;
-    "Rows" = 43;
+    "Guid" = "3863096B-F827-400E-A4B6-CEF611766225";
     "Ansi 14 Color (Dark)" = {
       "Red Component" = 0.41960784313725491;
       "Color Space" = "sRGB";
@@ -217,7 +214,7 @@ let
       "Alpha Component" = 1;
       "Green Component" = 0.76959484815597534;
     };
-    "Window Type" = 15;
+    "Window Type" = 0;
     "BM Growl" = true;
     "Prompt Before Closing 2" = false;
     "Command" = "";
@@ -378,7 +375,6 @@ let
       "Alpha Component" = 1;
       "Green Component" = 0.23660069704055786;
     };
-    "Name" = "bunny";
     "Transparency" = 0.016356783097854523;
     "Horizontal Spacing" = 1;
     "Cursor Color (Dark)" = {
@@ -652,21 +648,30 @@ let
       "Green Component" = 0.27843137254901962;
     };
   };
+
+  # Bunny profile: 143x43
+  bunnyProfile = baseProfile // {
+    "Name" = "bunny";
+    "Guid" = "3863096B-F827-400E-A4B6-CEF611766225";
+    "Columns" = 143;
+    "Rows" = 43;
+    "Window Type" = 15;
+  };
+  # Smol profile: 104x34
+  smolProfile = baseProfile // {
+    "Name" = "smol";
+    "Guid" = "A7C6D0E8-9F3B-4A1D-8E5C-2B4F6A8D9E0C";
+    "Columns" = 104;
+    "Rows" = 34;
+  };
 in
 {
   home.file."Library/Application Support/iTerm2/DynamicProfiles/nix-profile.json".text = builtins.toJSON {
-    Profiles = [ profile ];
+    Profiles = [ bunnyProfile smolProfile ];
   };
 
-
+  # Set bunny as default profile
   home.activation.setItermDefaultProfile = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    $DRY_RUN_CMD /usr/bin/defaults write com.googlecode.iterm2 "Default Bookmark Guid" -string "${guid}"
-  '';
-  # Copy SF Mono Terminal fonts if not already present
-  home.activation.installSFMono = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    if [ ! -f "$HOME/Library/Fonts/SFMono-Terminal.ttf" ]; then
-      $DRY_RUN_CMD mkdir -p "$HOME/Library/Fonts"
-      $DRY_RUN_CMD cp /System/Applications/Utilities/Terminal.app/Contents/Resources/Fonts/SFMono*.ttf "$HOME/Library/Fonts/" 2>/dev/null || true
-    fi
+    $DRY_RUN_CMD /usr/bin/defaults write com.googlecode.iterm2 "Default Bookmark Guid" -string "3863096B-F827-400E-A4B6-CEF611766225"
   '';
 }
