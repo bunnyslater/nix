@@ -125,4 +125,12 @@
   system.activationScripts.setDefaultBrowser.text = ''
     /opt/homebrew/bin/defaultbrowser helium-browser 2>/dev/null || true
   '';
+
+  # Set system language to French (GB) with English fallback
+  system.defaults.CustomUserPreferences = {
+    "-g" = {
+      AppleLanguages = [ "fr-GB" "en-GB" ];
+      AppleLocale = "fr_GB";
+    };
+  };
 }
