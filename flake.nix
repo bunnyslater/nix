@@ -36,6 +36,10 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+    homebrew-cmdx = {
+      url = "github:thedavidwenk/homebrew-cmdx";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ nixpkgs, nixpkgs-unstable, home-manager, plasma-manager, nix-flatpak, nix-darwin, nix-homebrew, ... }:
@@ -132,6 +136,8 @@
             ./darwin/homebrew.nix
             ./darwin/host-users.nix
             ./darwin/home.nix
+            ./darwin/modules/github-apps.nix
+            ./darwin/modules/tinystart.nix
           ];
         };
     };

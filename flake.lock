@@ -75,6 +75,22 @@
         "type": "github"
       }
     },
+    "homebrew-cmdx": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1763835429,
+        "narHash": "sha256-hA9uiK7pl0R/MSusqGbqRF+HS7vvF0haHxEn/KGdUoo=",
+        "owner": "thedavidwenk",
+        "repo": "homebrew-cmdx",
+        "rev": "4e5623c3bd8b45f05cfca21ab89c6fa2019c6e11",
+        "type": "github"
+      },
+      "original": {
+        "owner": "thedavidwenk",
+        "repo": "homebrew-cmdx",
+        "type": "github"
+      }
+    },
     "homebrew-core": {
       "flake": false,
       "locked": {
@@ -220,6 +236,7 @@
         "helium": "helium",
         "home-manager": "home-manager",
         "homebrew-cask": "homebrew-cask",
+        "homebrew-cmdx": "homebrew-cmdx",
         "homebrew-core": "homebrew-core",
         "nix-darwin": "nix-darwin",
         "nix-flatpak": "nix-flatpak",
