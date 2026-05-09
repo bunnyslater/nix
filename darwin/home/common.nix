@@ -12,6 +12,7 @@
   imports = [
     (import ./fish.nix { inherit hostname; })
     ./iterm2.nix
+    ./karabiner.nix
   ];
 
   fonts.fontconfig.enable = true;
