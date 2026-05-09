@@ -12,7 +12,7 @@
     '';
 
     shellAliases = {
-      s = "sudo darwin-rebuild switch --flake ~/.config/bunny#${hostname}";
+      s = "sudo darwin-rebuild switch --flake ~/dev/nix#${hostname}";
       fastfetch = "hyfetch";
       tidyup = "nix-collect-garbage -d";
     };
