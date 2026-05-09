@@ -11,6 +11,7 @@
 
   imports = [
     (import ./fish.nix { inherit hostname; })
+    ./git.nix
     ./iterm2.nix
     ./karabiner.nix
   ];
