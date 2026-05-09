@@ -544,7 +544,7 @@ let
       "Alpha Component" = 1;
       "Green Component" = 0.7607843279838562;
     };
-    "Normal Font" = "SFMonoTerminal-Regular 20";
+    "Normal Font" = "JetBrainsMono-Regular 20";
     "Unlimited Scrollback" = false;
     "Ansi 12 Color (Light)" = {
       "Red Component" = 0.45490196078431372;

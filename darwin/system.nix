@@ -120,4 +120,9 @@
   system.activationScripts.disableAppleIntelligence.text = ''
     /usr/bin/defaults write com.apple.CloudSubscriptionFeatures.optIn "545129924" -bool false
   '';
+
+  # Set Helium as default browser
+  system.activationScripts.setDefaultBrowser.text = ''
+    /opt/homebrew/bin/defaultbrowser helium-browser 2>/dev/null || true
+  '';
 }
