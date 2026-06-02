@@ -31,8 +31,8 @@
     # Defines installed user packages
     packages = with pkgs; [
       kdePackages.dolphin
-      kdePackages.kio 
-      kdePackages.kio-fuse 
+      kdePackages.kio
+      kdePackages.kio-fuse
       kdePackages.kio-extras
       kdePackages.xdg-desktop-portal-kde
       kdePackages.kate
@@ -50,9 +50,10 @@
       vscode
       nicotine-plus
       picard
-      opencode
       apx
       apx-gui
+      feishin
+      zed-editor
     ];
 
     # Some programs cannot be managed by home-manager directly, so for them we define abitrary files for them here.
