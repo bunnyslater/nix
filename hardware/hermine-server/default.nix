@@ -69,7 +69,13 @@ in
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.forceImportRoot = true;
 
+  # LUKS encrypted swap — open in initrd so systemd doesn't hang on /dev/mapper/cryptswap
+  boot.initrd.luks.devices."cryptswap" = {
+    device = "/dev/disk/by-uuid/467ea8c7-5bc0-485c-ba2c-a926c8dbdf45";
+  };
+
   # Initrd — remote unlock via Tailscale + SSH
+  # Bridge must be configured in initrd too (networking.bridges only applies to stage 2)
   boot.initrd = {
     systemd.enable = true;
     network = {
@@ -77,6 +83,32 @@ in
       ssh.enable = true;
       ssh.authorizedKeys = [ sshKey ];
       ssh.hostKeys = [ /mnt/etc/nixos/hardware/hermine-server/initrd-ssh-key ];
+    };
+    systemd.network = {
+      netdevs."br0" = {
+        netdevConfig = {
+          Kind = "bridge";
+          Name = "br0";
+        };
+      };
+      networks = {
+        "05-eth0" = {
+          matchConfig.Name = "eth0";
+          networkConfig.Bridge = "br0";
+        };
+        "05-br0" = {
+          matchConfig.Name = "br0";
+          addresses = [ "192.168.8.128/24" ];
+          routes = [{
+            routeConfig.Gateway = "192.168.8.1";
+          }];
+          networkConfig = {
+            DNS = [ "192.168.8.1" "1.1.1.1" "8.8.8.8" ];
+            DHCP = "no";
+            ConfigureWithoutCarrier = true;
+          };
+        };
+      };
     };
     # Tailscale in initrd for remote unlock over the internet
     # Requires a Tailscale pre-auth key — generate at https://login.tailscale.com/admin/settings/authkeys
