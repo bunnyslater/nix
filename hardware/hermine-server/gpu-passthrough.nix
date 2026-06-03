@@ -6,6 +6,8 @@ let
     #!/usr/bin/env bash
     # libvirt qemu hook — dynamic GPU bind/unbind
     # Installed to /var/lib/libvirt/hooks/qemu
+    set -e
+    exec >/var/log/libvirt-hook.log 2>&1
 
     GUEST_NAME="$1"
     OPERATION="$2"

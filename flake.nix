@@ -61,7 +61,7 @@
         overlays = [ appleColorEmojiOverlay ];
       };
       mkWorkstation =
-        { deviceModule, hmImports }:
+        { deviceModule, hmImports, username ? "billie" }:
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; pkgs_unstable = pkgs-unstable; };
@@ -75,7 +75,7 @@
                 useUserPackages = true;
                 backupFileExtension = "backup";
                 extraSpecialArgs = { inherit inputs; pkgs_unstable = pkgs-unstable; };
-                users.billie = {
+                users.${username} = {
                   imports = hmImports;
                 };
               };
@@ -101,13 +101,11 @@
             ];
           };
           hermine = mkWorkstation {
-            deviceModule = ./hardware/hermine-laptop/default.nix;
+            deviceModule = ./hardware/hermine-server/default.nix;
             hmImports = [
-              ./home/common.nix
-              ./home/gnome.nix
-              ./home/systemd.nix
-              ./home/silent-audio/silent-audio.nix
+              ./home/server-common.nix
             ];
+            username = "bunny";
           };
           x390 = mkWorkstation {
             deviceModule = ./hardware/x390/default.nix;
