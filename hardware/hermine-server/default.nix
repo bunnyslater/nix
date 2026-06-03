@@ -1,6 +1,6 @@
 { config, lib, pkgs, modulesPath, ... }:
 let
-  locale = "fr_FR.UTF-8";
+  locale = "en_GB.UTF-8";
   timeZone = "Europe/London";
   sshKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAGdRoHfx+feDtQCkjwIKr9uC5+6TILAcHamuvjjb4/o";
 in
@@ -15,6 +15,7 @@ in
 
   # Hostname
   networking.hostName = "hermine";
+  networking.hostId = "821cc3b0";
 
   # Networking — bridge + static IP
   networking.usePredictableInterfaceNames = false;
@@ -49,11 +50,12 @@ in
 
   # GPU — nvidia driver active by default
   hardware.graphics.enable = true;
+  hardware.nvidia.open = true;
   services.xserver.videoDrivers = [ "nvidia" ];
 
   # Ollama with CUDA
   services.ollama = {
-    enable = true;
+    enable = false;
     acceleration = "cuda";
   };
 
@@ -74,6 +76,7 @@ in
       enable = true;
       ssh.enable = true;
       ssh.authorizedKeys = [ sshKey ];
+      ssh.hostKeys = [ /mnt/etc/nixos/hardware/hermine-server/initrd-ssh-key ];
     };
     # Tailscale in initrd for remote unlock over the internet
     # Requires a Tailscale pre-auth key — generate at https://login.tailscale.com/admin/settings/authkeys
@@ -92,5 +95,5 @@ in
   };
 
   # Inject Tailscale auth key into initrd
-  boot.initrd.secrets."/tmp/tailscale-authkey" = "/persist/secrets/tailscale-initrd-authkey";
+  boot.initrd.secrets."/tmp/tailscale-authkey" = ./secrets/tailscale-initrd-authKey;
 }
