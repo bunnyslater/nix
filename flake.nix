@@ -101,7 +101,7 @@
             ];
           };
           hermine = mkWorkstation {
-            deviceModule = ./hardware/hermine/default.nix;
+            deviceModule = ./hardware/hermine-laptop/default.nix;
             hmImports = [
               ./home/common.nix
               ./home/gnome.nix
