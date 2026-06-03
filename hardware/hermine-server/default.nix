@@ -8,7 +8,6 @@ in
   imports = [
     ./hardware-configuration.nix
     ../../modules/server-baseline.nix
-    ./gpu-passthrough.nix
   ];
   workstation.server.enable = true;
   # Hostname
