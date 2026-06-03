@@ -49,9 +49,12 @@ in
       LC_TIME = locale;
     };
   };
-  # GPU — nvidia driver active by default
+  # GPU — nvidia + CUDA
   hardware.graphics.enable = true;
-  hardware.nvidia.open = true;
+  hardware.nvidia = {
+    open = true;
+    modesetting.enable = true;
+  };
   services.xserver.videoDrivers = [ "nvidia" ];
   # Ollama with CUDA
   services.ollama = {
