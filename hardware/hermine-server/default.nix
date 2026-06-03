@@ -24,6 +24,12 @@ in
   networking.defaultGateway = "192.168.8.1";
   networking.nameservers = [ "192.168.8.1" "1.1.1.1" "8.8.8.8" ];
   networking.networkmanager.enable = false;
+  # Lid close — server is a laptop, never suspend
+  services.logind = {
+    lidSwitch = "ignore";
+    lidSwitchExternalPower = "ignore";
+    lidSwitchDocked = "ignore";
+  };
   # Time & locale
   time.timeZone = timeZone;
   i18n = {
