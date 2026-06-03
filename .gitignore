@@ -3,3 +3,5 @@
 result
 AGENTS.md
 .DS_Store
+hardware/hermine-server/initrd-ssh-key.pub
+hardware/hermine-server/secrets/tailscale-initrd-authKey
