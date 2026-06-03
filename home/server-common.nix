@@ -22,6 +22,7 @@
         function fish_right_prompt
           set_color brgrey
           date "+%H:%M:%S"
+          echo -n " ($hostname)"
           set_color normal
         end
       '';
