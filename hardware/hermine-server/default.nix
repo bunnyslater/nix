@@ -68,6 +68,10 @@ in
   # ZFS
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.forceImportRoot = true;
+  boot.zfs.requestEncryptionCredentials = true;
+
+  # RTL8153 USB Ethernet adapter
+  boot.initrd.availableKernelModules = [ "r8152" ];
 
   # LUKS encrypted swap — open in initrd so systemd doesn't hang on /dev/mapper/cryptswap
   boot.initrd.luks.devices."cryptswap" = {
@@ -82,13 +86,17 @@ in
       enable = true;
       ssh.enable = true;
       ssh.authorizedKeys = [ sshKey ];
-      ssh.hostKeys = [ /mnt/etc/nixos/hardware/hermine-server/initrd-ssh-key ];
+      ssh.hostKeys = [ /home/bunny/.secrets/initrd-ssh-key ];
     };
     systemd.network = {
       netdevs."br0" = {
         netdevConfig = {
           Kind = "bridge";
           Name = "br0";
+        };
+        bridgeConfig = {
+          STP = false;
+          ForwardDelaySec = 0;
         };
       };
       networks = {
@@ -98,7 +106,9 @@ in
         };
         "05-br0" = {
           matchConfig.Name = "br0";
-          addresses = [ "192.168.8.128/24" ];
+          addresses = [{
+            addressConfig.Address = "192.168.8.128/24";
+          }];
           routes = [{
             routeConfig.Gateway = "192.168.8.1";
           }];
@@ -110,14 +120,21 @@ in
         };
       };
     };
+    # Initrd SSH — wait for network before starting
+    systemd.services."initrd-ssh" = {
+      after = [ "systemd-networkd-wait-online.service" ];
+      wants = [ "systemd-networkd-wait-online.service" ];
+    };
+
     # Tailscale in initrd for remote unlock over the internet
     # Requires a Tailscale pre-auth key — generate at https://login.tailscale.com/admin/settings/authkeys
     # and store in /persist/secrets/tailscale-initrd-authkey
     systemd.services.tailscaled = {
       description = "Tailscale daemon (initrd)";
       wantedBy = [ "initrd.target" ];
-      after = [ "systemd-networkd.service" ];
+      after = [ "systemd-networkd.service" "systemd-networkd-wait-online.service" ];
       requires = [ "systemd-networkd.service" ];
+      wants = [ "systemd-networkd-wait-online.service" ];
       serviceConfig = {
         Type = "simple";
         ExecStart = "${pkgs.tailscale}/bin/tailscaled --state=/var/lib/tailscale/tailscaled.state";
@@ -127,5 +144,5 @@ in
   };
 
   # Inject Tailscale auth key into initrd
-  boot.initrd.secrets."/tmp/tailscale-authkey" = ./secrets/tailscale-initrd-authKey;
+  boot.initrd.secrets."/tmp/tailscale-authkey" = /home/bunny/.secrets/tailscale-initrd-authKey;
 }
