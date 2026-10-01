@@ -89,7 +89,7 @@
             deviceModule = ./hardware/vm/default.nix;
             hmImports = [
               ./home/common.nix
-              ./home/gnome.nix
+              ./home/plasma.nix
               ./home/systemd.nix
             ];
           };

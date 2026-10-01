@@ -16,13 +16,13 @@ in
   imports = [
     ./hardware-configuration.nix
     ../../modules/baseline.nix
-    ../../modules/gnome.nix
+    ../../modules/plasma.nix
     ../../modules/flatpak.nix
   ];
 
   workstation = {
     baseline.enable = true;
-    gnome.enable = true;
+    plasma.enable = true;
   };
 
   # Hostname
@@ -53,28 +53,11 @@ in
   # Define and configure services including desktop environment, audio, etc.
   services = {
     xserver = {
-      enable = true;
-      videoDrivers = [ "nvidia" ];
       # Define keymap in X11.
       xkb = lib.mkMerge [
         { layout = layout; }
         (lib.mkIf (layoutVariant != null) { variant = layoutVariant; })
       ];
-    };
-  };
-
-  # Configure NVIDIA drivers.
-  hardware = {
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-    };
-    nvidia = {
-      modesetting.enable = true;
-      powerManagement.enable = false;
-      powerManagement.finegrained = false;
-      open = false;
-      nvidiaSettings = true;
     };
   };
 }
