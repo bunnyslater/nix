@@ -46,10 +46,8 @@ in {
                   "applications:systemsettings.desktop"
                   "applications:apple-notes.desktop"
                   "applications:org.signal.Signal.desktop"
+                  "applications:feishin.desktop"
                   "applications:virt-manager.desktop"
-                  "applications:chromium-vopono.desktop"
-                  "applications:anki.desktop"
-                  "applications:code.desktop"
                 ];
               };
             };
@@ -202,7 +200,7 @@ home.file.".local/share/konsole/Profile\ 1.profile" = {
 
 home.file.".config/dolphinrc" = {
   text = ''
-  MenuBar=Disabled
+  MenuBar=Enabled
 
   [General]
   EditableUrl=true
