@@ -40,7 +40,7 @@ in {
               General = {
                 launchers = [
                   "applications:org.kde.dolphin.desktop"
-                  "applications:firefox.desktop"
+                  "applications:helium.desktop"
                   "applications:1password.desktop"
                   "applications:org.kde.konsole.desktop"
                   "applications:systemsettings.desktop"

@@ -18,7 +18,7 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
     helium = {
-      url = "github:schembriaiden/helium-browser-nix-flake";
+      url = "github:oxcl/nix-flake-helium-browser";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

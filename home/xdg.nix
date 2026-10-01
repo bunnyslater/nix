@@ -30,9 +30,9 @@
     "text/xml" = [ "kate.desktop" ];
     "video/mp4" = [ "vlc.desktop" ];
     "video/matroska" = [ "vlc.desktop" ];
-    "x-scheme-handler/http" = [ "firefox.desktop" ];
-    "x-scheme-handler/https" = [ "firefox.desktop" ];
-    "x-scheme-handler/mailto" = [ "firefox.desktop" ];
+    "x-scheme-handler/http" = [ "helium.desktop" ];
+    "x-scheme-handler/https" = [ "helium.desktop" ];
+    "x-scheme-handler/mailto" = [ "helium.desktop" ];
   };
 in {
   xdg = {
