@@ -120,6 +120,13 @@ in
           };
         };
       };
+      syncthing = {
+        enable = true;
+        user = "billie";
+        dataDir = "/home/billie";
+        configDir = "/home/billie/.config/syncthing";
+        openDefaultPorts = true;
+      };
     };
 
     # Define users' settings and their packages.

@@ -39,7 +39,6 @@
       kdePackages.filelight
       loupe
       vlc
-      nextcloud-client
       libreoffice-qt6-fresh
       hunspell
       hunspellDicts.en_GB-ize

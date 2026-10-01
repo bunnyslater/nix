@@ -20,7 +20,7 @@
     brews = [ "defaultbrowser" "fastfetch" "fish" "hyfetch" "mas" "mpv" "ffmpeg" "imagemagick" ];
 
     # `brew install --cask`
-    casks = [ "font-jetbrains-mono" "iterm2" "anki" "cardinal-search" "thedavidwenk/cmdx/cmdx" "dockdoor" "swift-shift" "grandperspective" "helium-browser" "hiddenbar" "jan" "karabiner-elements" "keyboardcleantool" "libreoffice" "middleclick" "moonlight" "mullvad-vpn" "musicbrainz-picard" "neohtop" "nextcloud" "pearcleaner" "prismlauncher" "rectangle" "scroll-reverser" "signal" "stats" "textmate" "transmission" "trex" "utm" "vlc" "zed" ];
+    casks = [ "font-jetbrains-mono" "iterm2" "anki" "cardinal-search" "thedavidwenk/cmdx/cmdx" "dockdoor" "swift-shift" "grandperspective" "helium-browser" "hiddenbar" "jan" "karabiner-elements" "keyboardcleantool" "libreoffice" "middleclick" "moonlight" "mullvad-vpn" "musicbrainz-picard" "neohtop" "syncthing" "pearcleaner" "prismlauncher" "rectangle" "scroll-reverser" "signal" "stats" "textmate" "transmission" "trex" "utm" "vlc" "zed" ];
 
     # Mac App Store apps
     # masApps = {

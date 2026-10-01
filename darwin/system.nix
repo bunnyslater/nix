@@ -34,7 +34,7 @@
         ];
         persistent-others = [
           { folder = { path = "/Applications"; showas = "grid"; displayas = "folder"; }; }
-          { folder = { path = "/Users/${username}/Nextcloud/Screenshots"; showas = "grid"; displayas = "folder"; }; }
+          { folder = { path = "/Users/${username}/Pictures/Screenshots"; showas = "grid"; displayas = "folder"; }; }
           { folder = { path = "/Users/${username}/Documents"; showas = "grid"; displayas = "folder"; }; }
           { folder = { path = "/Users/${username}/Downloads"; displayas = "folder"; }; }
         ];
@@ -93,8 +93,8 @@
 
   # Configure screenshots location
   system.activationScripts.configureScreenshots.text = ''
-    /usr/bin/mkdir -p "/Users/${username}/Nextcloud/Screenshots"
-    /usr/bin/defaults write com.apple.screencapture location -string "/Users/${username}/Nextcloud/Screenshots"
+    /usr/bin/mkdir -p "/Users/${username}/Pictures/Screenshots"
+    /usr/bin/defaults write com.apple.screencapture location -string "/Users/${username}/Pictures/Screenshots"
     /usr/bin/killall SystemUIServer 2>/dev/null || true
   '';
 

@@ -17,20 +17,6 @@ in {
         WantedBy = [ "graphical-session.target" ];
       };
     };
-    autostart-nextcloud = {
-      Unit = {
-        Description = "Start Nextcloud at login";
-        PartOf = [ "graphical-session.target" ];
-        After = [ "graphical-session.target" ];
-      };
-      Service = {
-        ExecStart = "${lib.getExe pkgs.nextcloud-client}";
-        Restart = "on-failure";
-      };
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
-      };
-    };
     autostart-signal-desktop = {
       Unit = {
         Description = "Start Signal Desktop at login";
