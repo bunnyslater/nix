@@ -66,7 +66,20 @@ in {
               ];
             };
           }
-          "org.kde.plasma.digitalclock"
+          {
+            digitalClock = {
+              date = {
+                enable = true;
+                format = "longDate";
+                position = "besideTime";
+              };
+              font = {
+                family = "Inter";
+                size = 10;
+                weight = 400;
+              };
+            };
+          }
           "org.kde.plasma.showdesktop"
         ];
       }
