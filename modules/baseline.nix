@@ -250,6 +250,6 @@ in
     # Define console keymap.
     console.keyMap = "uk";
 
-    system.stateVersion = "25.11";
+    system.stateVersion = "26.05";
   };
 }

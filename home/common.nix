@@ -26,7 +26,7 @@
   home = {
     username = "billie";
     homeDirectory = "/home/" + "billie";
-    stateVersion = "25.11";
+    stateVersion = "26.05";
 
     # Defines installed user packages
     packages = with pkgs; [
