@@ -50,8 +50,6 @@
       vscode
       nicotine-plus
       picard
-      apx
-      apx-gui
       feishin
       zed-editor
     ];
@@ -74,14 +72,11 @@
     fish = {
       enable = true;
       shellAliases = {
-        # s = "sudo nixos-rebuild switch --flake ~/.config/bunny/flake#${globals.hostname}";
-        # hs = "home-manager switch --flake ~/.config/bunny/flake#${username}";
-        # update = "cd ~/.config/bunny/flake && nix flake update && sudo nixos-rebuild switch --flake .#${globals.hostname}";
+        s = "sudo nixos-rebuild switch --flake ~/.config/bunny/flake#${globals.hostname}";
+        update = "cd ~/.config/bunny/flake && nix flake update && sudo nixos-rebuild switch --flake .#${globals.hostname}";
         tidyup = "nix-collect-garbage -d";
         fastfetch = "hyfetch";
         vexec = "vopono exec --protocol wireguard --custom .no-osl-wg-004.conf";
-        omp = "apx debian run /home/billie/.local/bin/omp";
-        pi = "apx debian run /home/billie/.local/bin/omp";
       };
       interactiveShellInit = ''
         set fish_greeting
