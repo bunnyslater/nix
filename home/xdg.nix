@@ -21,11 +21,11 @@
     "audio/x-vorbis" = [ "vlc.desktop" ];
     "audio/x-vorbis+ogg" = [ "vlc.desktop" ];
     "audio/x-wav" = [ "vlc.desktop" ];
-    "image/bmp" = [ "org.gnome.Loupe.desktop" ];
-    "image/jpeg" = [ "org.gnome.Loupe.desktop" ];
-    "image/png" = [ "org.gnome.Loupe.desktop" ];
-    "image/webp" = [ "org.gnome.Loupe.desktop" ];
-    "image/x-icns" = [ "org.gnome.Loupe.desktop" ];
+    "image/bmp" = [ "org.kde.gwenview.desktop" ];
+    "image/jpeg" = [ "org.kde.gwenview.desktop" ];
+    "image/png" = [ "org.kde.gwenview.desktop" ];
+    "image/webp" = [ "org.kde.gwenview.desktop" ];
+    "image/x-icns" = [ "org.kde.gwenview.desktop" ];
     "text/plain" = [ "kate.desktop" ];
     "text/xml" = [ "kate.desktop" ];
     "video/mp4" = [ "vlc.desktop" ];

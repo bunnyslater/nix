@@ -37,7 +37,6 @@
       kdePackages.xdg-desktop-portal-kde
       kdePackages.kate
       kdePackages.filelight
-      loupe
       vlc
       libreoffice-qt6-fresh
       hunspell

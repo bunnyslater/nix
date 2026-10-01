@@ -115,6 +115,7 @@
     gnomeExtensions.clipboard-indicator
     gnomeExtensions.adw-gtk3-colorizer
     ptyxis
+    loupe
     adwaita-icon-theme
     adwaita-icon-theme-legacy
     morewaita-icon-theme
