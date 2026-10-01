@@ -1,4 +1,4 @@
-{ lib, pkgs, plasma-manager, config, ... }:
+{ lib, pkgs, plasma-manager, config, nixosConfig, ... }:
 {
   imports = [
     # Plasma-manager configuration (configures wallpaper, theme, etc.) and a couple abitrary files (Konsole colorscheme and profile, .dolphinrc).
@@ -72,8 +72,8 @@
     fish = {
       enable = true;
       shellAliases = {
-        s = "sudo nixos-rebuild switch --flake ~/.config/bunny/flake#${globals.hostname}";
-        update = "cd ~/.config/bunny/flake && nix flake update && sudo nixos-rebuild switch --flake .#${globals.hostname}";
+        s = "sudo nixos-rebuild switch --flake ~/.config/bunny#${nixosConfig.networking.hostName}";
+        update = "cd ~/.config/bunny && nix flake update && sudo nixos-rebuild switch --flake .#${nixosConfig.networking.hostName}";
         tidyup = "nix-collect-garbage -d";
         fastfetch = "hyfetch";
         vexec = "vopono exec --protocol wireguard --custom .no-osl-wg-004.conf";
