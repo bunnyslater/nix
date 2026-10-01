@@ -84,103 +84,103 @@ in {
     xdg-utils
     ffmpegthumbnailer
   ];
-  home.file.".local/share/konsole/Breeze.colorscheme" = {
+  home.file.".local/share/konsole/CatppuccinMocha.colorscheme" = {
   text = ''
     [Background]
-    Color=20,29,42
+    Color=30,30,46
 
     [BackgroundFaint]
-    Color=49,54,59
+    Color=30,30,46
 
     [BackgroundIntense]
-    Color=0,0,0
+    Color=30,30,46
 
     [Color0]
-    Color=35,38,39
+    Color=69,71,90
 
     [Color0Faint]
-    Color=49,54,59
+    Color=69,71,90
 
     [Color0Intense]
-    Color=127,140,141
+    Color=88,91,112
 
     [Color1]
-    Color=237,21,21
+    Color=243,139,168
 
     [Color1Faint]
-    Color=120,50,40
+    Color=243,139,168
 
     [Color1Intense]
-    Color=192,57,43
+    Color=243,119,153
 
     [Color2]
-    Color=17,209,22
+    Color=166,227,161
 
     [Color2Faint]
-    Color=23,162,98
+    Color=166,227,161
 
     [Color2Intense]
-    Color=28,220,154
+    Color=137,216,139
 
     [Color3]
-    Color=246,116,0
+    Color=249,226,175
 
     [Color3Faint]
-    Color=182,86,25
+    Color=249,226,175
 
     [Color3Intense]
-    Color=253,188,75
+    Color=235,211,145
 
     [Color4]
-    Color=29,153,243
+    Color=137,180,250
 
     [Color4Faint]
-    Color=27,102,143
+    Color=137,180,250
 
     [Color4Intense]
-    Color=61,174,233
+    Color=116,168,252
 
     [Color5]
-    Color=155,89,182
+    Color=245,194,231
 
     [Color5Faint]
-    Color=97,74,115
+    Color=245,194,231
 
     [Color5Intense]
-    Color=142,68,173
+    Color=242,174,222
 
     [Color6]
-    Color=26,188,156
+    Color=148,226,213
 
     [Color6Faint]
-    Color=24,108,96
+    Color=148,226,213
 
     [Color6Intense]
-    Color=22,160,133
+    Color=107,215,202
 
     [Color7]
-    Color=252,252,252
+    Color=166,173,200
 
     [Color7Faint]
-    Color=99,104,109
+    Color=166,173,200
 
     [Color7Intense]
-    Color=255,255,255
+    Color=186,194,222
 
     [Foreground]
-    Color=252,252,252
+    Color=205,214,244
 
     [ForegroundFaint]
-    Color=239,240,241
+    Color=205,214,244
 
     [ForegroundIntense]
-    Color=61,174,233
+    Color=205,214,244
 
     [General]
     Anchor=0.5,0.5
     Blur=false
     ColorRandomization=false
-    Description=Breeze
+    Description=CatppuccinMocha
     FillStyle=Tile
     Opacity=1
     Wallpaper=
@@ -191,8 +191,8 @@ in {
 home.file.".local/share/konsole/Profile\ 1.profile" = {
   text = ''
     [Appearance]
-    ColorScheme=Breeze
-    Font=Hack,12,-1,7,400,0,0,0,0,0,0,0,0,0,0,1
+    ColorScheme=CatppuccinMocha
+    Font=Hack,14,-1,7,400,0,0,0,0,0,0,0,0,0,0,1
 
     [General]
     Name=Profile 1
